@@ -1,0 +1,14 @@
+mixin createBlogFlow(blog)
+    .container
+        hr
+    .container
+        .container
+            a(href=`/blog/${blog.urlExt}`) 
+                span 
+                    strong #{blog.title}
+        .container  
+            .content
+                p #{blog.subject}
+        .container
+            small.text-muted #{blog.date}
+    

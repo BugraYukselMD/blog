@@ -1,0 +1,23 @@
+mixin createBlog(blog)
+    .container
+        .row
+            .col.col-sm-8
+                h4 #{blog.title}
+            if isAuthenticated
+                    if !(inFav)
+                        .col.col-sm-2
+                            form(action=`/favourites/${blog._id}` method='POST')
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                button(type='submit').btn.btn-secondary-outline
+                                    img(src="/img/addFav.png" width="30" height="30")
+                    if inFav
+                        .col.col-sm-2
+                            form(action=`/delete-fav/${blog._id}` method='POST')
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                button(type='submit').btn.btn-secondary-outline
+                                    img(src="/img/inFav.png" width="30" height="30")
+        .article  
+            .content
+                p !{blog.body}
+        small.text-muted #{blog.date}
+        hr

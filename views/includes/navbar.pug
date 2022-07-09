@@ -1,0 +1,50 @@
+block append styles 
+    link(rel="stylesheet" href="/css/navbar.css")
+   
+nav.navbar-dark.bg-secondary.sticky-top
+    
+    .container#brandDiv
+        a(href='/')#navBrand.navbar-brand GÜNDEN GÜNE DAHA İYİYE
+    
+    button#togglerButton.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#itemDiv" aria-controls='#itemDiv', aria-expanded='false', aria-label='Toggle navigation').btn.btn-secondary-outline
+        span.navbar-toggler-icon 
+
+    .container.collapse.navbar-collapse(id="itemDiv")
+        ul.navbar-nav
+
+            li.nav-item
+                a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
+
+            li.nav-item
+                a(href="/about", class=(path === '/about'?'nav-link active':'nav-link')) Hakkımda
+
+            li.nav-item
+                a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
+        
+            if isAdmin
+                
+                li.nav-item
+                a(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
+                
+                li.nav-item
+                a(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım
+    
+nav.navbar-dark.bg-secondary
+    button#togglerButton.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#accountDiv" aria-controls='#accountDiv', aria-expanded='false', aria-label='Toggle navigation' width="30" height="30").btn.btn-secondary-outline
+        img(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="25" height="25").rounded-circle 
+
+    .container.collapse.navbar-collapse(id="accountDiv")
+        ul.navbar-nav#accountDiv
+            if isAuthenticated
+                li.nav-item
+                    a.nav-link(href="/logout") Çıkış Yap
+                li.nav-item
+                    a.nav-link(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')) Profilim  
+                li.nav-item
+                    a.nav-link(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')) Favorilerim
+            else 
+                li.nav-item
+                    a.nav-link(href="/login") Giriş Yap
+                        
+                li.nav-item
+                    a.nav-link(href="/register") Üye Ol

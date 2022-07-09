@@ -1,0 +1,67 @@
+include ../mixins/add-reply.pug
+
+mixin createComment(blog)
+    if blog.comments.length > 0
+        each comment in blog.comments
+            .container
+                .row
+                    .col.col-sm-10
+                        .container 
+                            .row 
+                                .col.col-sm-4
+                                    small 
+                                        strong #{comment.user.name}
+                                .col.col-sm-8
+                                    small    
+                                        p #{comment.message}
+                    .col.col-sm-2
+                        .row
+                            .col.col-sm-1
+                                if isAuthenticated
+                                    if user.email == comment.user.email || isAdmin
+                                        form(action=`/delete-comment/${comment._id}` method='POST')
+                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                            button(type='submit').btn.btn-secondary-outline.btn-sm
+                                                img(src="/img/delete.png" width="10" height="10")
+                            .col.col-sm-1
+                                if isAuthenticated   
+                                    button(type="button" data-bs-toggle="collapse" data-bs-target=`#replyArea${comment._id}`).btn.btn-secondary-outline 
+                                        img(src="/img/reply.png" width="15" heigth="15")
+                                
+                    .container
+                        if comment.replies.length > 0
+                            each reply in comment.replies
+                                .row
+                                    .col.col-sm-1
+                                    .col.col-sm-10
+                                        .container
+                                            .row
+                                                .col.col-sm-10
+                                                    .container 
+                                                        .row 
+                                                            .col.col-sm-4
+                                                                small 
+                                                                    strong #{reply.user.name}
+                                                            .col.col-sm-8
+                                                                small 
+                                                                    p #{reply.reply} 
+                                                
+
+                                                if isAuthenticated
+                                                    if user.email == reply.user.email || isAdmin
+                                                        .col.col-sm-2   
+                                                            form(action=`/delete-reply/${reply._id}` method='POST')
+                                                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                                button(type='submit').btn.btn-secondary-outline.btn-sm
+                                                                    img(src="/img/delete.png" width="10" height="10")
+                    .container.collapse(id=`replyArea${comment._id}`)
+                        .container
+                            .row 
+                                .col.col-sm-2
+                                .col.col-sm-10
+                                    +replyArea(blog, comment)
+
+
+    else 
+        .row
+            

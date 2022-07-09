@@ -1,0 +1,30 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if errorMessage
+        div.alert.alert-danger.col-sm-7 !{errorMessage}
+    form(action="/register" method="POST" enctype="multipart/form-data")
+        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+        .form-group.row
+            label(for="name").col-sm-2.col-form-label Kullanıcı Adı
+            .col-sm-5
+                input.form-control#name(type="text" name="name")  
+
+        .form-group.row
+            label(for="email").col-sm-2.col-form-label Mail Adresi
+            .col-sm-5
+                input.form-control#email(type="text" name="email")    
+
+        .form-group.row
+            label(for="password").col-sm-2.col-form-label Şifre
+            .col-sm-5
+                input.form-control#password(type="password" name="password")  
+
+        .form-group.row
+            label(for="imageUrl").col-sm-2.col-form-label Profil Fotoğrafı
+            .col-sm-10
+                input.form-control-file#image(type="file" name="image")
+
+        .form-group.row
+            .col-sm-5.offset-sm-2
+                input(type="submit" value="Üye Ol").btn.btn-primary  

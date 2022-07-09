@@ -1,0 +1,26 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if errorMessage
+        div.alert.alert-danger.col-sm-7 !{errorMessage}
+    .container
+        form(action="/login" method="POST")
+            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+            .form-group.row
+                label(for="email").col-sm-1.col-form-label Mail Adresi
+                .col-sm-5.pr-0
+                    input.form-control#name(type="text" name="email")   
+
+            .form-group.row
+                label(for="password").col-sm-1.col-form-label Şifre
+                .col-sm-5.pr-0
+                
+                    input.form-control#password(type="password" name="password")  
+                    
+            .form-group.row
+                .col-sm-5.offset-sm-1
+                    input(type="submit" value="Giriş Yap").btn.btn-primary   
+
+            .form-group.row
+                .col-sm-5.offset-sm-1
+                    a(href="/reset-password").btn.btn-link.p-0 Şifreni mi unuttun? 

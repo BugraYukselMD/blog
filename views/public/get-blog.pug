@@ -1,0 +1,24 @@
+extends ../layouts/main-layout.pug 
+include ../mixins/createBlog.pug
+include ../mixins/add-comment.pug
+include ../mixins/list-comment.pug
+
+block append content 
+
+        if blog
+            +createBlog(blog)
+
+            .container 
+                +createComment(blog)
+            
+            hr
+    
+            .container
+                if isAuthenticated
+                    +commentArea(blog)
+                else 
+                    div.alert.alert-warning Lütfen yorum yapmak için giriş yapınız.
+        else 
+            div.alert.alert-alert Yazı Bulunamadı
+    
+    

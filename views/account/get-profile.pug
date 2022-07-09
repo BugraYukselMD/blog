@@ -1,0 +1,41 @@
+extends ../layouts/main-layout.pug
+
+block content
+    if errorMessage
+        div.alert.alert-danger.col-sm-7 !{errorMessage}
+    .row 
+        .col.col-sm-3
+        .col.col-sm-8
+            .container
+                form(action=`/profile/${user.urlExt}` method="POST"  enctype="multipart/form-data")
+                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                    input(type="file" name="image" id="custom-file-chooser" hidden)
+                    
+                    .form-group.row
+                        .col-sm-1
+                        .col-sm-6
+                            img(src=`/uploads/${user.imageUrl}` width='200' height='200').img-fluid 
+                            button(type="button").btn.btn-secondary-outline
+                                label(for="custom-file-chooser")
+                                    img(src="/img/select.png" width="20" height="20")
+                    br
+                    .form-group.row
+                        .col-sm-2
+                            label(for="name") Kullanıcı Adı
+                        .col-sm-5
+                            input.form-control(type="text" name="name" value= `${user.name}`)   
+                    
+                    .form-group.row
+                        .col-sm-2
+                            label(for="email") Mail Adresi
+                        .col-sm-5
+                            input.form-control(type="text" name="email" value= `${user.email}` readonly)   
+                    br
+                    .form-group.row
+                        .col-sm-2
+                        .col-sm-3
+                            input(type="submit" value="Profili Güncelle").btn.btn-primary
+                        .col-sm-1
+                            a(href="/reset-password").btn.btn-link
+                                img(src="/img/ch-pass.png" width="30" height="30" title="Şifrenizi değiştirmek için tıklayınız") 
+    
