@@ -105,13 +105,6 @@ blogSchema.methods.deleteComment = function(commentid){
 }
 
 blogSchema.methods.deleteReply = function(replyid){
-    /*let Rcomment;
-    
-    currentComments.forEach(comment=>{
-        console.log(comment.replies)
-    })
-    console.log(replyid)
-    */
     const replyIndex  = this.comments.map(comment => {
         return comment.replies.findIndex(reply => {
             return reply._id == replyid;

@@ -1,9 +1,9 @@
 #brandDiv{
     margin-left: 150px;
-    position: relative;
+    position: absolute;
 }
 #navBrand{
-    position: relative;
+    position: absolute;
     font-size: 1.25em; /*divide px to 16*/
     font-family: 'Audiowide', cursive;
     font-weight: normal;
