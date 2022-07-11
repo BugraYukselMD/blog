@@ -103,7 +103,7 @@ module.exports.postLogin = (req,res,next)=>{
                     };
                     req.session.errorMessage = 'Mail adresi veya şifreyi hatalı girdiniz!';
                     req.session.save(function(err){
-                        req.session.redirect('/login');
+                        res.redirect('/login');
                     });
                 }).catch(err=>{
                 console.log(err);
@@ -387,16 +387,15 @@ module.exports.postDeleteComment = (req,res,next)=>{
 
 module.exports.postDeleteReply = (req,res,next)=>{
     const replyid = req.params.replyid;
-
-    Blog.findOne({comment:{replies:{_id:replyid}}})
+    const blogid = req.body.blogid;
+    console.log(replyid)
+    Blog.findOne({_id: blogid})
     .then((blog)=>{
         blog.deleteReply(replyid)
-        .then(()=>{
-            res.redirect(`/blog/${blog.urlExt}`);
-        })
-        .catch(err=>{
-            console.log(err)
-        })
+        return blog;
+    })
+    .then(blog=>{
+        res.redirect(`/blog/${blog.urlExt}`);
     })
     .catch(err=>{
         console.log(err)

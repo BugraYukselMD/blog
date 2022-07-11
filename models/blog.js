@@ -46,6 +46,9 @@ const blogSchema = mongoose.Schema({
                 type: Date,
             },
             replies:[{
+                _id: {
+                    type: mongoose.Types.ObjectId
+                },
                 reply:
                     {type: String},
                 user: {
@@ -79,6 +82,7 @@ blogSchema.methods.addReply = function(commentid, reply, user){
     })
     const updatedComments = [...this.comments]
     updatedComments[index].replies.push({
+        _id: mongoose.Types.ObjectId(),
         reply: reply,
         user: user,
         date: currentDate()
@@ -101,8 +105,15 @@ blogSchema.methods.deleteComment = function(commentid){
 }
 
 blogSchema.methods.deleteReply = function(replyid){
+    /*let Rcomment;
+    
+    currentComments.forEach(comment=>{
+        console.log(comment.replies)
+    })
+    console.log(replyid)
+    */
     const replyIndex  = this.comments.map(comment => {
-         return comment.replies.findIndex(reply => {
+        return comment.replies.findIndex(reply => {
             return reply._id == replyid;
         })
     })
@@ -112,9 +123,8 @@ blogSchema.methods.deleteReply = function(replyid){
             return reply._id == replyid;
         })
     })
-
-    const updatedReplies = [];
     const currentComments = [...this.comments]
+    const updatedReplies = [];
     currentComments[messageIndex].replies.map((reply)=>{
         if (reply._id == replyid){
             return false
@@ -124,6 +134,7 @@ blogSchema.methods.deleteReply = function(replyid){
     
     this.comments[messageIndex].replies = updatedReplies;
     return this.save()
+    
 }
 
 module.exports = mongoose.model('Blog', blogSchema);

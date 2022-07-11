@@ -21,6 +21,7 @@ mixin createComment(blog)
                                     if user.email == comment.user.email || isAdmin
                                         form(action=`/delete-comment/${comment._id}` method='POST')
                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                            input(type="hidden" name="blogid" value=`${blog._id}`)
                                             button(type='submit').btn.btn-secondary-outline.btn-sm
                                                 img(src="/img/delete.png" width="10" height="10")
                             .col.col-sm-1
@@ -52,6 +53,7 @@ mixin createComment(blog)
                                                         .col.col-sm-2   
                                                             form(action=`/delete-reply/${reply._id}` method='POST')
                                                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                                input(type="hidden" name="blogid" value=`${blog._id}`)
                                                                 button(type='submit').btn.btn-secondary-outline.btn-sm
                                                                     img(src="/img/delete.png" width="10" height="10")
                     .container.collapse(id=`replyArea${comment._id}`)
