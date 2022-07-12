@@ -5,60 +5,63 @@ nav.navbar-dark.bg-secondary.sticky-top
     .container   
         .row
             .container
-                .col-sm-4
-                    a(href='/')#navBrand.navbar-brand GÜNDEN GÜNE DAHA İYİYE
+                .container 
+                    .row
+                        .col-sm-4
+                            a(href='/')#navBrand.navbar-brand GÜNDEN GÜNE DAHA İYİYE
+                        .col-sm-8
 
         .row
-            .row 
-                .col-sm-11
-                .col-sm-1
-                    button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#itemDiv" aria-controls='#itemDiv', aria-expanded='false', aria-label='Toggle navigation').btn.btn-secondary-outline
-                        span.navbar-toggler-icon 
-            .row
+            .col-sm-11
+            .col-sm-1
+                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#itemDiv" aria-controls='#itemDiv', aria-expanded='false', aria-label='Toggle navigation').btn.btn-secondary-outline
+                    span.navbar-toggler-icon 
+        .row
             .container.collapse.navbar-collapse(id="itemDiv")
-                .col-sm-5 
-                .col-sm-6
-                    ul.navbar-nav
+                .container
+                    .row
+                        .col-sm-5 
+                        .col-sm-6
+                            ul.navbar-nav
 
-                        li.nav-item
-                            a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
+                                li.nav-item
+                                    a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
 
-                        li.nav-item
-                            a(href="/about", class=(path === '/about'?'nav-link active':'nav-link')) Hakkımda
+                                li.nav-item
+                                    a(href="/about", class=(path === '/about'?'nav-link active':'nav-link')) Hakkımda
 
-                        li.nav-item
-                            a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
-                    
-                        if isAdmin
+                                li.nav-item
+                                    a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
                             
-                            li.nav-item
-                            a(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
-                            
-                            li.nav-item
-                            a(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım
-        .row             
-            .row 
-                .col-sm-11 
-                .col-sm-1
-                    button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#accountDiv" aria-controls='#accountDiv', aria-expanded='false', aria-label='Toggle navigation' width="30" height="30").btn.btn-secondary-outline
-                        img(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="25" height="25").rounded-circle 
-            .row
-                .container.collapse.navbar-collapse(id="accountDiv")
-                    .container
-                        .row
-                            .col-sm-5 
-                            .col-sm-6
-                                ul.navbar-nav#accountDiv
-                                    if isAuthenticated
-                                        li.nav-item
-                                            a.nav-link(href="/logout") Çıkış Yap
-                                        li.nav-item
-                                            a.nav-link(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')) Profilim  
-                                        li.nav-item
-                                            a.nav-link(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')) Favorilerim
-                                    else 
-                                        li.nav-item
-                                            a.nav-link(href="/login") Giriş Yap
-                                                
-                                        li.nav-item
-                                            a.nav-link(href="/register") Üye Ol
+                                if isAdmin
+                                    
+                                    li.nav-item
+                                    a(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
+                                    
+                                    li.nav-item
+                                    a(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım
+        .row              
+            .col-sm-11 
+            .col-sm-1
+                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#accountDiv" aria-controls='#accountDiv', aria-expanded='false', aria-label='Toggle navigation' width="30" height="30").btn.btn-secondary-outline
+                    img(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="25" height="25").rounded-circle 
+        .row
+            .container.collapse.navbar-collapse(id="accountDiv")
+                .container
+                    .row
+                        .col-sm-5 
+                        .col-sm-6
+                            ul.navbar-nav#accountDiv
+                                if isAuthenticated
+                                    li.nav-item
+                                        a.nav-link(href="/logout") Çıkış Yap
+                                    li.nav-item
+                                        a.nav-link(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')) Profilim  
+                                    li.nav-item
+                                        a.nav-link(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')) Favorilerim
+                                else 
+                                    li.nav-item
+                                        a.nav-link(href="/login") Giriş Yap
+                                            
+                                    li.nav-item
+                                        a.nav-link(href="/register") Üye Ol
