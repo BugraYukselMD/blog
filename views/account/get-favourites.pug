@@ -9,9 +9,9 @@ block append content
         if blogs.length > 0
             .container 
                 .row 
-                    .col.col-sm-5 
+                    .col.col-xs-5 
                         strong BAŞLIK
-                    .col.col-sm-5 
+                    .col.col-xs-5 
                         strong YAYINLANMA TARİHİ
                 hr
             .container
@@ -24,7 +24,7 @@ block append content
                         .col.col-sm-1
                             form(action=`/delete-fav/${blog._id}` method='POST')
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                button(type='submit').btn.btn-secondary.btn-sm 
+                                button(type='submit').btn.btn-secondary-outline
                                     img(src="/img/delete.png" width="10" height="10")
                     br
         else
