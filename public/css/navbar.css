@@ -1,8 +1,8 @@
 #navBrand{
     font-size: 1.25em; /*divide px to 16*/
-    font-family: 'Audiowide', cursive;
+    font-family: 'Josefin Sans', sans-serif;
     font-weight: normal;
     font-style: normal;
-    text-shadow: 0px 3px 3px #ababab;
+    /*text-shadow: 0px 3px 3px #ababab;*/
 }
 

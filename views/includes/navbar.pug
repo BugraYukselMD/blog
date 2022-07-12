@@ -1,67 +1,57 @@
 block append styles 
     link(rel="stylesheet" href="/css/navbar.css")
    
-nav.navbar-dark.bg-secondary.sticky-top
-    .container   
-        .row
+nav.navbar-dark.bg-success.bg-gradient.sticky-top
+    .container 
+        .row.pt-3
             .container
                 .container 
                     .row
                         .col-sm-4
                             a(href='/')#navBrand.navbar-brand GÜNDEN GÜNE DAHA İYİYE
-                        .col-sm-8
-
+                        .col-sm-8     
         .row
-            .col-sm-11
-            .col-sm-1
-                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#itemDiv" aria-controls='#itemDiv', aria-expanded='false', aria-label='Toggle navigation').btn.btn-secondary-outline.rounded-circle
-                    img(src=`/img/menu.png` width="25" height="25").rounded-circle 
-        .row
-            .container.collapse.navbar-collapse(id="itemDiv")
-                .container
-                    .row
-                        .col-sm-5 
-                        .col-sm-6
-                            ul.navbar-nav
+            .col-sm-3 
+            .col-sm-6
+                ul.navbar-nav.list-group-horizontal
+                    li.nav-item.mx-auto
+                        a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
 
-                                li.nav-item
-                                    a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
+                    li.nav-item.mx-auto
+                        a(href="/about", class=(path === '/about'?'nav-link active':'nav-link')) Hakkımda
 
-                                li.nav-item
-                                    a(href="/about", class=(path === '/about'?'nav-link active':'nav-link')) Hakkımda
-
-                                li.nav-item
-                                    a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
-                            
-                                if isAdmin
-                                    
-                                    li.nav-item
-                                    a(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
-                                    
-                                    li.nav-item
-                                    a(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım
-        .row              
-            .col-sm-11 
-            .col-sm-1
-                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#accountDiv" aria-controls='#accountDiv', aria-expanded='false', aria-label='Toggle navigation' width="30" height="30").btn.btn-secondary-outline.rounded-circle
-                    img(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="25" height="25").rounded-circle 
-        .row
-            .container.collapse.navbar-collapse(id="accountDiv")
-                .container
-                    .row
-                        .col-sm-5 
-                        .col-sm-6
-                            ul.navbar-nav#accountDiv
-                                if isAuthenticated
-                                    li.nav-item
-                                        a.nav-link(href="/logout") Çıkış Yap
-                                    li.nav-item
-                                        a.nav-link(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')) Profilim  
-                                    li.nav-item
-                                        a.nav-link(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')) Favorilerim
-                                else 
-                                    li.nav-item
-                                        a.nav-link(href="/login") Giriş Yap
-                                            
-                                    li.nav-item
-                                        a.nav-link(href="/register") Üye Ol
+                    li.nav-item.mx-auto
+                        a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
+                
+                    if isAdmin
+                        
+                        li.nav-item.mx-auto
+                            a(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
+                        
+                        li.nav-item.mx-auto
+                            a(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım
+            .col-sm-3
+                .dropdown
+                    button.dropdown-toggle#dropdownToggler(type="button" data-bs-toggle="dropdown" aria-expanded='false').btn.btn-secondary-outline.rounded-circle
+                        img(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="35" height="35").rounded-circle 
+        
+                    .container
+                        ul.dropdown-menu(aria-labelledby="dropdownToggler")
+                            if isAuthenticated
+                                .row
+                                    .col-sm-7
+                                        li
+                                            a.dropdown-item(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')) Profilim  
+                                        li
+                                            a.dropdown-item(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')) Favorilerim
+                                
+                                    .col-sm-5
+                                        li.pt-1
+                                            a.dropdown-item(href="/logout") 
+                                                img(src=`/img/logout.png` width="25" height="25")
+                            else 
+                                li
+                                    a.dropdown-item(href="/login") Giriş Yap
+                                        
+                                li
+                                    a.dropdown-item(href="/register") Üye Ol
