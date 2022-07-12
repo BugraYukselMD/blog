@@ -14,8 +14,8 @@ nav.navbar-dark.bg-secondary.sticky-top
         .row
             .col-sm-11
             .col-sm-1
-                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#itemDiv" aria-controls='#itemDiv', aria-expanded='false', aria-label='Toggle navigation').btn.btn-secondary-outline
-                    span.navbar-toggler-icon 
+                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#itemDiv" aria-controls='#itemDiv', aria-expanded='false', aria-label='Toggle navigation').btn.btn-secondary-outline.rounded-circle
+                    img(src=`/img/menu.png` width="25" height="25").rounded-circle 
         .row
             .container.collapse.navbar-collapse(id="itemDiv")
                 .container
@@ -43,7 +43,7 @@ nav.navbar-dark.bg-secondary.sticky-top
         .row              
             .col-sm-11 
             .col-sm-1
-                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#accountDiv" aria-controls='#accountDiv', aria-expanded='false', aria-label='Toggle navigation' width="30" height="30").btn.btn-secondary-outline
+                button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#accountDiv" aria-controls='#accountDiv', aria-expanded='false', aria-label='Toggle navigation' width="30" height="30").btn.btn-secondary-outline.rounded-circle
                     img(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="25" height="25").rounded-circle 
         .row
             .container.collapse.navbar-collapse(id="accountDiv")
