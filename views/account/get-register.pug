@@ -4,7 +4,7 @@ block content
     .container
         if errorMessage
             div.alert.alert-danger.col-sm-7 !{errorMessage}
-        .card(style="width: 25rem;height: 20rem;").mx-auto
+        .card(style="width: 45vw;height: 30vw;").mx-auto
             .card-body 
                 form(action="/register" method="POST" enctype="multipart/form-data")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
@@ -39,5 +39,5 @@ block content
                     .row
                         .col-sm-4
                         .col-sm-4
-                            input(type="submit" value="Üye Ol").btn.btn-primary 
+                            input(type="submit" value="Üye Ol").btn.btn-success 
                         .col-sm-4
