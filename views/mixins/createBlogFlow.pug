@@ -3,7 +3,7 @@ mixin createBlogFlow(blog)
         hr
     .container
         .container
-            a(href=`/blog/${blog.urlExt}`) 
+            a(href=`/blog/${blog.urlExt}`).text-decoration-none.text-success 
                 span 
                     strong #{blog.title}
         .container  
