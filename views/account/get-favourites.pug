@@ -9,7 +9,7 @@ block append content
         if blogs.length > 0
             .container 
                 .row 
-                    .col.col-xs-6 
+                    .col.col-xs-6
                         strong BAŞLIK
                     .col.col-xs-5 
                         strong YAYINLANMA TARİHİ
@@ -19,7 +19,7 @@ block append content
                 each blog in blogs
                     .row
                         .col.col-sm-6
-                            a(href=`/blog/${blog.urlExt}`) #{blog.title}
+                            a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt #{blog.title}
                         .col.col-sm-5. 
                             #{blog.date}
                         .col.col-sm-1

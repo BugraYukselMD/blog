@@ -4,6 +4,7 @@ block content
     .container
         if errorMessage
             div.alert.alert-danger.col-sm-7 !{errorMessage}
+        br
         .card(style="width: 40vw;height: 18vw;").mx-auto 
             .card-body
                 form(action="/reset-password" method="POST")
@@ -18,5 +19,5 @@ block content
                     .row
                         .col-sm-3
                         .col-sm-6
-                            input(type="submit" value="Mail Gönder").btn.btn-success
+                            input(type="submit" value="Mail Gönder").btn.colorChangeable
                         .col-sm-3

@@ -1,7 +1,7 @@
 block append styles 
     link(rel="stylesheet" href="/css/navbar.css")
    
-nav.navbar-dark.bg-success.bg-gradient.sticky-top
+nav.navbar-dark.colorChangeable.sticky-top
     .container 
         .row.pt-3
             .container
@@ -41,9 +41,9 @@ nav.navbar-dark.bg-success.bg-gradient.sticky-top
                                 .row
                                     .col-sm-7
                                         li
-                                            a.dropdown-item(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')) Profilim  
+                                            a.dropdown-item(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')).text-light.colorChangeable.rounded.mx-auto Profilim   
                                         li
-                                            a.dropdown-item(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')) Favorilerim
+                                            a.dropdown-item(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')).text-light.colorChangeable.rounded Favorilerim
                                 
                                     .col-sm-5
                                         li.pt-1

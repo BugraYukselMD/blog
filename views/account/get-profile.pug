@@ -4,12 +4,12 @@ block content
     .container
         if errorMessage
             div.alert.alert-danger.col-sm-7 !{errorMessage}
+        br
         .card(style="width: 45vw;height: 45vw;").mx-auto
             .card-body
                 form(action=`/profile/${user.urlExt}` method="POST"  enctype="multipart/form-data")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                     input(type="file" name="image" id="custom-file-chooser" hidden)
-                    br
                     .row 
                         .col-sm-2 
                         .col-sm-8
@@ -32,7 +32,7 @@ block content
                     .row
                         .col-sm-2
                         .col-sm-5
-                            input(type="submit" value="Profili Güncelle").btn.btn-success
+                            input(type="submit" value="Profili Güncelle").btn.colorChangeable
                         .col-sm-5
                             a(href="/reset-password").btn.btn-link
                                 img(src="/img/ch-pass.png" width="30" height="30" title="Şifrenizi değiştirmek için tıklayınız")

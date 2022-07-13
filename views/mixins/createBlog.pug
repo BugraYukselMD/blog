@@ -3,7 +3,7 @@ mixin createBlog(blog)
         .row
             .col-sm-8
                 h4
-                    strong #{blog.title}
+                    strong.colorChangeableTxt #{blog.title}
             if isAuthenticated
                     if !(inFav)
                         .col-sm-2

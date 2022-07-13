@@ -4,6 +4,7 @@ block content
     .container
         if errorMessage
             div.alert.alert-danger.col-sm-7 !{errorMessage}
+        br
         .card(style="width: 45vw;height: 30vw;").mx-auto
             .card-body 
                 form(action="/register" method="POST" enctype="multipart/form-data")
@@ -39,5 +40,5 @@ block content
                     .row
                         .col-sm-4
                         .col-sm-4
-                            input(type="submit" value="Üye Ol").btn.btn-success 
+                            input(type="submit" value="Üye Ol").btn.colorChangeable 
                         .col-sm-4
