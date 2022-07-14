@@ -8,17 +8,17 @@ mixin createComment(blog)
             .card(style="width: 35rem;").mx-auto 
                 .card-body
                     .row
-                        .col-sm-10 
+                        .col-xs-10.col-sm-10 
                             .row
-                                .col-sm-4
+                                .col-xs-4.col-sm-4
                                     small 
                                         strong #{comment.user.name}
-                                .col-sm-8
+                                .col-xs-8.col-sm-8
                                     small    
                                         p #{comment.message}
-                        .col-sm-2
+                        .col-xs-2.col-sm-2
                             .row
-                                .col-sm-1
+                                .col-xs-1.col-sm-1
                                     if isAuthenticated
                                         if user.email == comment.user.email || isAdmin
                                             form(action=`/delete-comment/${comment._id}` method='POST')
@@ -26,26 +26,26 @@ mixin createComment(blog)
                                                 input(type="hidden" name="blogid" value=`${blog._id}`)
                                                 button(type='submit').btn.btn-secondary-outline.btn-sm
                                                     img(src="/img/delete.png" width="10" height="10")
-                                .col-sm-1
+                                .col-xs-1.col-sm-1
                                     if isAuthenticated   
                                         button(type="button" data-bs-toggle="collapse" data-bs-target=`#replyArea${comment._id}` ).btn.btn-secondary-outline.btn-sm 
                                             img(src="/img/reply.png" width="13" heigth="13")
                 if comment.replies.length > 0
                         each reply in comment.replies
                             .row
-                                .col-sm-10.mx-auto
+                                .col-xs-10.col-sm-10.mx-auto
                                     .row
-                                        .col-sm-10
+                                        .col-xs-10.col-sm-10
                                             .row 
-                                                .col-sm-4
+                                                .col-xs-4.col-sm-4
                                                     small 
                                                         strong #{reply.user.name}
-                                                .col-sm-8
+                                                .col-xs-8.col-sm-8
                                                     small 
                                                         p #{reply.reply} 
                                         if isAuthenticated
                                             if user.email == reply.user.email || isAdmin
-                                                .col-sm-2   
+                                                .col-xs-2.col-sm-2   
                                                     form(action=`/delete-reply/${reply._id}` method='POST')
                                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                         input(type="hidden" name="blogid" value=`${blog._id}`)
@@ -53,8 +53,8 @@ mixin createComment(blog)
                                                             img(src="/img/delete.png" width="10" height="10")
                 .container.collapse(id=`replyArea${comment._id}`)
                     .row 
-                        .col-sm-2
-                        .col-sm-10.mx-auto
+                        .col-xs-2.col-sm-2
+                        .col-xs-10.col-sm-10.mx-auto
                             +replyArea(blog, comment)
                 .container(style="height: 1rem;") 
         .container(style="height: 1rem;")        

@@ -4,7 +4,7 @@ block content
     .container
         if errorMessage
             .container(style="width: 30rem;").mx-auto
-                .alert.alert-danger.col-sm-7 !{errorMessage}
+                .alert.alert-danger !{errorMessage}
         .container(style="height: 1rem;")
         .card(style="width: 30rem;").mx-auto
             .card-body
@@ -12,28 +12,28 @@ block content
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                     input(type="file" name="image" id="custom-file-chooser" hidden)
                     .row 
-                        .col-sm-2 
-                        .col-sm-8
+                        .col-xs-2.col-sm-2 
+                        .col-xs-8.col-sm-8
                             img(src=`/uploads/${user.imageUrl}` width='200' height='200').img-fluid 
                             button(type="button").btn.btn-secondary-outline
                                 label(for="custom-file-chooser")
                                     img(src="/img/select.png" width="20" height="20")
-                        .col-sm-2      
+                        .col-xs-2.col-sm-2      
                     .row
-                        .col-sm-4
+                        .col-xs-4.col-sm-4
                             label(for="name") Kullanıcı Adı
-                        .col-sm-8
+                        .col-xs-8.col-sm-8
                             input.form-control(type="text" name="name" value= `${user.name}`)   
                     .row
-                        .col-sm-4
+                        .col-xs-4.col-sm-4
                             label(for="email") Mail Adresi
-                        .col-sm-8
+                        .col-xs-8.col-sm-8
                             input.form-control(type="text" name="email" value= `${user.email}` readonly)   
                     .container(style="height: 1rem;")
                     .row
-                        .col-sm-2
-                        .col-sm-5
+                        .col-xs-2.col-sm-2
+                        .col-xs-5.col-sm-5
                             input(type="submit" value="Profili Güncelle").btn.colorChangeable
-                        .col-sm-5
+                        .col-xs-5.col-sm-5
                             a(href="/reset-password").btn.btn-link
                                 img(src="/img/ch-pass.png" width="30" height="30" title="Şifrenizi değiştirmek için tıklayınız")

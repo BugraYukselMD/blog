@@ -3,20 +3,20 @@ mixin createBlog(blog)
     .card(style="width: 45rem;").mx-auto 
         .card-body
             .row
-                .col-sm-8
+                .col-xs-8.col-sm-8
                     h4 
                         strong.colorChangeableTxt #{blog.title}   
                 if isAuthenticated
                     if !(inFav)
-                        .col-sm-2
-                        .col-sm-2
+                        .col-xs-2.col-sm-2
+                        .col-xs-2.col-sm-2
                             form(action=`/favourites/${blog._id}` method='POST')
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 button(type='submit').btn.btn-secondary-outline
                                     img(src="/img/addFav.png" width="30" height="30")
                     if inFav
-                        .col-sm-2
-                        .col-sm-2
+                        .col-xs-2.col-sm-2
+                        .col-xs-2.col-sm-2
                             form(action=`/delete-fav/${blog._id}` method='POST')
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 button(type='submit').btn.btn-secondary-outline

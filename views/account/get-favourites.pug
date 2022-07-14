@@ -11,22 +11,22 @@ block append content
         .container(style="height: 1rem;")
         .container
             .row
-                .col-sm-5
-                .col-sm-1
+                .col-xs-5.col-sm-5
+                .col-xs-1.col-sm-1
                     h5.mx-auto 
                         strong.colorChangeableTxt  FAVORİLERİM
-                .col-sm-6
+                .col-xs-6.col-sm-6
         each blog in blogs
             .container(style="height: 1rem;")
             .card(style="width: 40rem;").mx-auto 
                 .card-body
                     .row
-                        .col-sm-5 
+                        .col-xs-5.col-sm-5 
                             a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt 
                                 strong #{blog.title}   
-                        .col-sm-5. 
+                        .col-xs-5.col-sm-5. 
                             #{blog.date}
-                        .col-sm-1
+                        .col-xs-1.col-sm-1
                             form(action=`/delete-fav/${blog._id}` method='POST')
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 button(type='submit').btn.btn-secondary-outline
