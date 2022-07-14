@@ -3,10 +3,12 @@ include ../mixins/createBlogFlow.pug
 
 block append content 
     if (action !== 'undefined' && action === 'deleted')
-        div.alert.alert-danger Blog silindi
+        .container(style="width: 40rem;").mx-auto
+            .alert.alert-danger Blog silindi
 
     if (action !== 'undefined' && action === 'updated')
-        div.alert.alert-success Blog başarıyla güncellendi
+        .container(style="width: 40rem;").mx-auto
+            .alert.alert-success Blog başarıyla güncellendi
 
     if blogs.length > 0
         br

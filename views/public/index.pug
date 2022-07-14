@@ -3,7 +3,8 @@ include ../mixins/createBlogFlow.pug
 
 block append content 
     if errorMessage
-        div.alert.alert-warning.col-sm-7 !{errorMessage}
+        .container(style="width: 40rem;").mx-auto
+            .alert.alert-warning !{errorMessage}
     if blogs.length > 0
         each blog in blogs
             +createBlogFlow(blog)

@@ -4,7 +4,8 @@ include ../mixins/createBlogFlow.pug
 block append content 
     if isAuthenticated
         if (action !== 'undefined' && action === 'deleted')
-            div.alert.alert-danger Blog favorilerinizden çıkarıldı
+            .container(style="width: 25rem;").mx-auto
+                .alert.alert-danger Blog favorilerinizden çıkarıldı
 
         if blogs.length > 0
         br
