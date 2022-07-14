@@ -8,7 +8,7 @@ block append content
                 .alert.alert-danger Blog favorilerinizden çıkarıldı
 
         if blogs.length > 0
-        br
+        .container(style="height: 1rem;")
         .container
             .row
                 .col-sm-5
@@ -17,7 +17,7 @@ block append content
                         strong.colorChangeableTxt  FAVORİLERİM
                 .col-sm-6
         each blog in blogs
-            br
+            .container(style="height: 1rem;")
             .card(style="width: 40rem;").mx-auto 
                 .card-body
                     .row
@@ -31,6 +31,6 @@ block append content
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 button(type='submit').btn.btn-secondary-outline
                                     img(src="/img/delete.png" width="10" height="10")
-                    br
+                    .container(style="height: 1rem;")
         else
             h1 Favorilerinizde blog mevcut değil!

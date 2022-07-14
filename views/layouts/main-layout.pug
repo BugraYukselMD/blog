@@ -1,10 +1,11 @@
 <!doctype html>
 html(lang="en")
-    include ../includes/head
-    include ../includes/navbar           
-    body
-        br
-        block content          
-    include ../includes/script 
-    footer  
-        include ../includes/footer
+    div(style="width:50rem;").mx-auto
+        include ../includes/head
+        include ../includes/navbar           
+        body
+            .container(style="height: 1rem;")
+            block content          
+        include ../includes/script 
+        footer  
+            include ../includes/footer

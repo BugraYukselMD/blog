@@ -5,12 +5,12 @@ block content
         if errorMessage
             .container(style="width: 25rem;").mx-auto
                 .alert.alert-danger !{errorMessage}
-        br
+        .container(style="height: 1rem;")
         .card(style="width: 25rem;").mx-auto 
             .card-body
                 form(action="/login" method="POST")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                    br
+                    .container(style="height: 1rem;")
                     .row
                         .col-sm-4
                             label(for="email").col-form-label Mail Adresi
@@ -22,7 +22,7 @@ block content
                             label(for="password").col-form-label Şifre
                         .col-sm-8
                             input.form-control#password(type="password" name="password")  
-                    br       
+                    .container(style="height: 1rem;")      
                     .row
                         .col-sm-4 
                         .col-sm-4.mx-auto

@@ -5,13 +5,13 @@ block content
         if errorMessage
             .container(style="width: 30rem;").mx-auto
                 .alert.alert-danger !{errorMessage}
-        br
+        .container(style="height: 1rem;")
         .card(style="width: 30rem;").mx-auto
             .card-body 
                 form(action="/register" method="POST" enctype="multipart/form-data")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                     input(type="file" name="image" id="custom-file-chooser" hidden)
-                    br
+                    .container(style="height: 1rem;")
                     .row
                         .col-sm-4
                             label(for="name").col-form-label Kullanıcı Adı
@@ -37,7 +37,7 @@ block content
                             button(type="button").btn.btn-secondary-outline
                                 label(for="custom-file-chooser")
                                     img(src="/img/select.png" width="20" height="20")
-                    br
+                    .container(style="height: 1rem;")
                     .row
                         .col-sm-4
                         .col-sm-4
