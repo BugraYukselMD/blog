@@ -9,41 +9,40 @@ head
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-div(style="width:80rem;").mx-auto
     
-    nav.navbar-dark.sticky-top(style="background-color: #006432;color:white;")
-        br
-        .container
-            .col-xs-1.col-sm-1
-                form(action="/admin/blogs/" method="GET")
-                    button(type="submit" style="background-color: #006432;color:white;").btn
-                        img(src=`/img/return.png` width="25" height="25")
-        br
+nav.navbar-dark.sticky-top(style="background-color: #006432;color:white;")
     br
-    body    
-        .card(style="width: 80rem;").mx-auto
-            .card-body 
-                form(action="/admin/add-blog" method="POST")
-                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                    .row
-                        .col-xs-2.col-sm-2
-                            label(for="title").form-label Blog Başlığı
-                        .col-xs-9.col-sm-9.mx-auto
-                            input.form-control(type="text" name="title" value= `${input.title}`)               
-                    br
-                    .row 
-                        .col-xs-2.col-sm-2
-                            label(for="body").form-label Blog Yazısı
-                        .col-xs-10.col-sm-10.mx-auto
-                            textarea.form-control#body(name="editor" value= `${input.body}`)   
-                    
-                    .row
-                        .col-xs-5.col-sm-5
-                        .col-xs-1.col-sm-1
-                            input(type="submit" value="Blog Yayınla" style="background-color: #006432;color:white;").btn
-                        .col-xs-5.col-sm-5
-        br
+    .container
+        .col-xs-1.col-sm-1
+            form(action="/admin/blogs/" method="GET")
+                button(type="submit" style="background-color: #006432;color:white;").btn
+                    img(src=`/img/return.png` width="25" height="25")
+    br
+br
+body    
+    .card(style="width: 80rem;").mx-auto
+        .card-body 
+            form(action="/admin/add-blog" method="POST")
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                .row
+                    .col-xs-2.col-sm-2
+                        label(for="title").form-label Blog Başlığı
+                    .col-xs-9.col-sm-9.mx-auto
+                        input.form-control(type="text" name="title" value= `${input.title}`)               
+                br
+                .row 
+                    .col-xs-2.col-sm-2
+                        label(for="body").form-label Blog Yazısı
+                    .col-xs-10.col-sm-10.mx-auto
+                        textarea.form-control#body(name="editor" value= `${input.body}`)   
+                
+                .row
+                    .col-xs-5.col-sm-5
+                    .col-xs-1.col-sm-1
+                        input(type="submit" value="Blog Yayınla" style="background-color: #006432;color:white;").btn
+                    .col-xs-5.col-sm-5
+    br
 
-        script(src="/script/editor.js")
-        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous")
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js")
+    script(src="/script/editor.js")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js")
