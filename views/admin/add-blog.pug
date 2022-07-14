@@ -10,12 +10,12 @@ head
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 body
-    nav.navbar-dark.bg-success.bg-gradient.sticky-top
+    nav.navbar-dark.sticky-top(style="background-color: #006432;color:white;")
         br
         .container
             .col-xs-1
                 form(action="/" method="GET")
-                    button(type="submit" ).btn.btn-success-gradient
+                    button(type="submit" style="background-color: #006432;color:white;").btn
                         img(src=`/img/return.png` width="25" height="25")
         br
     br
@@ -38,7 +38,7 @@ body
                 .row
                     .col-sm-5
                     .col-sm-1
-                        input(type="submit" value="Blog Yayınla").btn.btn-success
+                        input(type="submit" value="Blog Yayınla" style="background-color: #006432;color:white;").btn
                     .col-sm-5
 
     script(src="/script/editor.js")

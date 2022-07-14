@@ -182,10 +182,9 @@ module.exports.postRegister = (req,res,next)=>{
             imageUrl: image?image.filename:undefined,
             password: hashedPassword,
         });
-        return newUser.save();
+        newUser.save();
     })
     .then(() => {
-        res.redirect('/login')
 
         var mailOptions = {
             from: "onlygreyhat@gmail.com",
@@ -194,7 +193,8 @@ module.exports.postRegister = (req,res,next)=>{
             html: '<h1>Hesabınız başarılı bir şekilde oluşturuldu!</h1>'
           };
 
-        transporter.sendMail(mailOptions);      
+        transporter.sendMail(mailOptions);    
+        res.redirect('/login')  
     })
     .catch(err => {
         if(err.name == 'ValidationError'){
