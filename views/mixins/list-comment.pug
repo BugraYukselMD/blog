@@ -58,10 +58,11 @@ mixin createComment(blog)
                             +replyArea(blog, comment)
                 .container(style="height: 1rem;") 
         .container(style="height: 1rem;")        
-        if isAuthenticated
-            +commentArea(blog)
-        else 
-            .alert.alert-warning.mx-auto Yorum yapmak için lütfen giriş yapınız.
+        .container
+            if isAuthenticated
+                +commentArea(blog)
+            else 
+                .alert.alert-warning.mx-auto Yorum yapmak için lütfen giriş yapınız.
     else 
         .row
             

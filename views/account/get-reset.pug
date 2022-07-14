@@ -3,7 +3,7 @@ extends ../layouts/main-layout.pug
 block content   
     .container
         if errorMessage
-            .container(style="width: 25rem;").mx-auto
+            .container.mx-auto
                 .alert.alert-danger !{errorMessage}
         .container(style="height: 1rem;")
         .card(style="width: 25rem;").mx-auto 
