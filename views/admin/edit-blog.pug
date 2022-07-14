@@ -19,7 +19,7 @@ body
                         img(src=`/img/return.png` width="25" height="25")
         br
     br
-    .card(style="width: 80vw;height: 90vw;").mx-auto
+    .card(style="width: 80rem;height: 91rem;").mx-auto
         .card-body 
             form(action=`/admin/edit-blog/${blog.urlExt}` method="POST")
                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
@@ -41,6 +41,7 @@ body
                     .col-sm-1
                         input(type="submit" value="Güncelle" style="background-color: #006432;color:white;").btn
                     .col-sm-5
+    br
 
     script(src="/script/editor.js")
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous")

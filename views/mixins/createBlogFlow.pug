@@ -1,14 +1,14 @@
 mixin createBlogFlow(blog)
-    .container
-        hr
-    .container
-        .container
-            a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt
-                span 
-                    strong #{blog.title}
-        .container  
-            .content
+    br
+    .card(style="width: 40rem;").mx-auto 
+        .card-body
+            .row
+                a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt
+                    span 
+                        strong #{blog.title}   
+            hr
+            .row
                 p #{blog.subject}
-        .container
+        .card-footer
             small.text-muted #{blog.date}
     

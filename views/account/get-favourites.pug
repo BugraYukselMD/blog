@@ -7,22 +7,25 @@ block append content
             div.alert.alert-danger Blog favorilerinizden çıkarıldı
 
         if blogs.length > 0
-            .container 
-                .row 
-                    .col.col-xs-6
-                        strong BAŞLIK
-                    .col.col-xs-5 
-                        strong YAYINLANMA TARİHİ
-                    .col.col-sm-1
-                hr
-            .container
-                each blog in blogs
+        br
+        .container
+            .row
+                .col-sm-5
+                .col-sm-1
+                    h5.mx-auto 
+                        strong.colorChangeableTxt  FAVORİLERİM
+                .col-sm-6
+        each blog in blogs
+            br
+            .card(style="width: 40rem;height: 4rem").mx-auto 
+                .card-body
                     .row
-                        .col.col-sm-6
-                            a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt #{blog.title}
-                        .col.col-sm-5. 
+                        .col-sm-5 
+                            a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt 
+                                strong #{blog.title}   
+                        .col-sm-5. 
                             #{blog.date}
-                        .col.col-sm-1
+                        .col-sm-1
                             form(action=`/delete-fav/${blog._id}` method='POST')
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 button(type='submit').btn.btn-secondary-outline
