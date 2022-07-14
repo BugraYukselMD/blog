@@ -1,11 +1,11 @@
 mixin commentArea(blog)
-    form(action="" method="POST")
-        input(type="hidden" name="_csrf" value=`${csrfToken}`)
-        .form-group.row
-            .col-sm-2
-                label(for="message").col-sm-2.col-form-label Yorum Yaz
-            .col-sm-9
-                textarea.form-control(id="Comment" name="comment") 
-            .col-sm-1.col-sm-offset-1
-                button(type="submit" value="Yorumu Yayınla").btn.btn-secondary-outline
-                    img(src="/img/send.png" width="45" height="45")
+    .card(style="width: 35rem;").mx-auto 
+        .card-body
+            form(action="" method="POST")
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                .row   
+                    .col-sm-10
+                        textarea.form-control(id="Comment" name="comment" placeholder="Yorum yaz...") 
+                    .col-sm-1.col-sm-offset-1
+                        button(type="submit" value="Yorumu Yayınla").btn.btn-secondary-outline
+                            img(src="/img/send.png" width="45" height="45")

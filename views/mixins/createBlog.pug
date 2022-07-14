@@ -1,10 +1,12 @@
 mixin createBlog(blog)
-    .container
-        .row
-            .col-sm-8
-                h4
-                    strong.colorChangeableTxt #{blog.title}
-            if isAuthenticated
+    br
+    .card(style="width: 45rem;").mx-auto 
+        .card-body
+            .row
+                .col-sm-8
+                    h4 
+                        strong.colorChangeableTxt #{blog.title}   
+                if isAuthenticated
                     if !(inFav)
                         .col-sm-2
                         .col-sm-2
@@ -19,9 +21,12 @@ mixin createBlog(blog)
                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                 button(type='submit').btn.btn-secondary-outline
                                     img(src="/img/inFav.png" width="30" height="30")
-        .article  
-            .content
-                .container
-                    p !{blog.body}
-        small.text-muted #{blog.date}
-        hr
+            hr
+            .row
+                .article  
+                    .content
+                        .container
+                            p !{blog.body}
+        .card-footer
+            small.text-muted #{blog.date}
+

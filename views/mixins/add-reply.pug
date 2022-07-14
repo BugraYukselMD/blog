@@ -1,11 +1,9 @@
 mixin replyArea(blog,comment)
-
     form(action=`/blog/${blog.urlExt}/${comment._id}` method="POST")
         input(type="hidden" name="_csrf" value=`${csrfToken}`)
-        .container
-            .form-group.row
-                .col-sm-8
-                    textarea.form-control(id="Reply" name="reply" placeholder="Cevap yaz...")
-                .col-sm-1.col-sm-offset-1   
-                    button(type="submit" value="Cevapla").btn.btn-secondary-outline
-                        img(src="/img/send.png" width="45" height="45")
+        .row
+            .col-sm-8
+                textarea.form-control(id="Reply" name="reply" placeholder="Cevap yaz...")
+            .col-sm-1.col-sm-offset-1   
+                button(type="submit" value="Cevapla").btn.btn-secondary-outline
+                    img(src="/img/send.png" width="45" height="45")

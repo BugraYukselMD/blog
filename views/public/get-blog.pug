@@ -1,6 +1,5 @@
 extends ../layouts/main-layout.pug 
 include ../mixins/createBlog.pug
-include ../mixins/add-comment.pug
 include ../mixins/list-comment.pug
 
 block append content 
@@ -8,18 +7,9 @@ block append content
         if blog
             br
             +createBlog(blog)
-
-            .container 
-                +createComment(blog)
-            
-            .container
-                hr
     
-            .container
-                if isAuthenticated
-                    +commentArea(blog)
-                else 
-                    div.alert.alert-warning Lütfen yorum yapmak için giriş yapınız.
+            +createComment(blog)
+  
         else 
             div.alert.alert-alert Yazı Bulunamadı
     
