@@ -19,7 +19,7 @@ body
                         img(src=`/img/return.png` width="25" height="25")
         br
     br
-    .card(style="width: 80rem;height: 91rem;").mx-auto
+    .card(style="width: 80rem;").mx-auto
         .card-body 
             form(action=`/admin/edit-blog/${blog.urlExt}` method="POST")
                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
