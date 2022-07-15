@@ -36,9 +36,11 @@ mixin createComment(blog)
                                                 if isAuthenticated   
                                                     button(type="button" data-bs-toggle="collapse" data-bs-target=`#replyArea${comment._id}` ).btn.btn-secondary-outline.border-0
                                                         img(src="/img/reply.png" width="13" heigth="13")
-
+                                            div  
+                                                button(type="button" data-bs-toggle="collapse" data-bs-target=`#replies${comment._id}` ).btn.btn-secondary-outline.border-0
+                                                    img(src="/img/loadmore.png" width="13" heigth="13")
                         
-                        .container.collapse(id=`replyArea${comment._id}`)            
+                        .container.collapse(id=`replies${comment._id}`)            
                             if comment.replies.length > 0
                                 each reply in comment.replies
                                     .container
@@ -58,16 +60,17 @@ mixin createComment(blog)
                                                                     input(type="hidden" name="blogid" value=`${blog._id}`)
                                                                     button(type='submit').btn.btn-secondary-outline.border-0
                                                                         img(src="/img/delete.png" width="10" height="10")
+                        .container.collapse(id=`replyArea${comment._id}`)    
                             .container    
                                 +replyArea(blog, comment)                   
         
-        .container
-            if isAuthenticated
-                +commentArea(blog)
-            else 
-                .container.for-spacing
+        
+        if isAuthenticated
+            +commentArea(blog)
+        else 
+            .container.for-spacing
 
-                .container.common-size.mx-auto
-                    .alert.alert-warning Yorum yapmak için lütfen giriş yapınız.
+            .container.common-size.mx-auto
+                .alert.alert-warning Yorum yapmak için lütfen giriş yapınız.
     else 
             
