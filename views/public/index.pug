@@ -6,17 +6,24 @@ block append content
         .container.mx-auto
             .alert.alert-warning !{errorMessage}
     if blogs.length > 0
-        each blog in blogs
-            .container
-                +createBlogFlow(blog)
+        .container
+            each blog in blogs
+                .flex-row
+                    .d-flex.justify-content-center.p-2
+                        .container
+                            +createBlogFlow(blog)
+        
+                if !(isFull)
+                    .container.for-spacing
+                    .d-flex.justify-content-center.p-2
+                        form(action=`/` method='POST')
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            button(type='submit').btn.btn-secondary-outline.border-0
+                                img(src="/img/loadmore.png" width="30" height="30")
     
-        if isFull
-            .container 
-                .container(style="height: 1rem;")
-                form(action=`/` method='POST')
-                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                    button(type='submit').btn.btn-secondary-outline
-                        img(src="/img/loadmore.png" width="30" height="30")
     else 
-        .container 
-            h1 Blog Bulunamadı!
+        
+        .container.for-spacing
+
+        .container.common-size.mx-auto
+            .alert.alert-secondary Blog yazıları yüklenemedi. Lütfen sayfayı yenileyiniz.

@@ -1,14 +1,23 @@
 mixin createBlogFlow(blog)
-    .container(style="height: 1rem;")
-    .card(style="width: 70%;").mx-auto 
+    
+    .card.common-size.mx-auto 
         .card-body
-            .row
-                a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt
-                    span 
-                        strong #{blog.title}   
+           
+            .flex-row
+                .d-flex.justify-content-center
+                    div
+                        a.text-decoration-none.common-text-color(href=`/blog/${blog.urlExt}`)
+                            strong #{blog.title}  
+            
             hr
-            .row
-                p #{blog.subject}
-        .card-footer
-            small.text-muted #{blog.date}
+           
+            .flex-row
+                .d-flex.justify-content-center
+                    p #{blog.subject}
+            
+            .flex-row
+                .d-flex.justify-content-end
+                    div
+                        small.text-muted #{blog.date}
+            
     

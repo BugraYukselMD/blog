@@ -6,11 +6,19 @@ block append content
 
         if blog
             br
-            +createBlog(blog)
-    
-            +createComment(blog)
+            .flex-row
+                .d-flex.justify-content-center
+                    .container
+                        +createBlog(blog)
+            //.flex-row
+                .d-flex.justify-content-center
+                    .container
+                        +createComment(blog)
   
         else 
-            div.alert.alert-alert Yazı Bulunamadı
+            .container.for-spacing
+
+            .container.common-size.mx-auto
+                .alert.alert-secondary Blog bulunamadı!
     
     

@@ -2,53 +2,55 @@ block append styles
     link(rel="stylesheet" href="/css/navbar.css")
    
 nav.navbar-dark.common-content-color.sticky-top
-    .container 
-        .row.pt-3
-            .container
-                .container 
-                    a(href='/')#navBrand.navbar-brand GÜNDEN GÜNE DAHA İYİYE
+    .flex-row.pt-3
+        .container
+            .d-flex.justify-content-start
+                a#navBrand.navbar-brand(href='/') GÜNDEN GÜNE DAHA İYİYE
      
-        .row
-            .col-sm-3 
-            .col-sm-6
-                ul.navbar-nav.list-group-horizontal
-                    li.nav-item.mx-auto
-                        a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
+    .flex-row
+        .d-flex.justify-content-center.p-2
+            div.p-2
+                a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
 
-                    li.nav-item.mx-auto
-                        a(href="/about", class=(path === '/about'?'nav-link active':'nav-link')) Hakkımda
+            div.p-2
+                a(href="/about", class=(path === '/about'?'nav-link active':'nav-link')) Hakkımda
 
-                    li.nav-item.mx-auto
-                        a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
-                
-                    if isAdmin
-                        
-                        li.nav-item.mx-auto
-                            a(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
-                        
-                        li.nav-item.mx-auto
-                            a(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım
-            .col-sm-3
-                .dropdown
-                    button.dropdown-toggle#dropdownToggler(type="button" data-bs-toggle="dropdown" aria-expanded='false').btn.btn-secondary-outline.rounded-circle
-                        img(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="35" height="35").rounded-circle 
-        
-                    .container
-                        ul.dropdown-menu(aria-labelledby="dropdownToggler")
-                            if isAuthenticated
-                                .row
-                                    .col
-                                        li
-                                            a.dropdown-item(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'active':'') style="text-align: center;").text-light.colorChangeable.rounded Profilim   
-                                        li
-                                            a.dropdown-item(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'active':'') style="text-align: center;").text-light.colorChangeable.rounded Favorilerim
-                                .row
-                                    .col
-                                        a.dropdown-item(href="/logout" style="text-align: center;")
-                                            img(src=`/img/logout.png` width="25" height="25")
-                            else 
-                                li
-                                    a.dropdown-item(href="/login") Giriş Yap
-                                        
-                                li
-                                    a.dropdown-item(href="/register") Üye Ol
+            div.p-2
+                a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
+
+            div
+                button.dropdown-toggle#dropdownToggler.btn.btn-secondary-outline.rounded-circle.border-0(type="button" data-bs-toggle="dropdown" aria-expanded='false')
+                    img.rounded-circle(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="35" height="35")
+    
+                div.dropdown-menu(aria-labelledby="dropdownToggler")
+                    
+                    if isAuthenticated
+                        .flex-row
+                            
+                            .d-flex.align-items-center
+                                .flex-column
+                                    .d-flex.justify-content-center.p-1
+                                        a.dropdown-item.common-text-color.text-center(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'active':'')) Profilim   
+                                    .d-flex.justify-content-center.p-1    
+                                        a.dropdown-item.common-text-color.text-center(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'active':'')) Favorilerim
+
+                                    if isAdmin
+                                        .d-flex.justify-content-center.p-1
+                                            a.dropdown-item.common-text-color.text-center(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) 
+                                                strong Blog Yaz
+                                        .d-flex.justify-content-center.p-1
+                                            a.dropdown-item.common-text-color.text-center(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) 
+                                                strong Yazılarım
+
+                                .flex-column
+                                    .d-flex.align-self-center
+                                        div.align-self-stretch
+                                            a.dropdown-item(href="/logout")
+                                                img(src=`/img/logout.png` width="25" height="25")
+                    
+                    else 
+                        .flex-row
+                            .d-flex.justify-content-center.p-1
+                                a.dropdown-item.common-text-color.text-center(href="/login") Giriş Yap
+                            .d-flex.justify-content-center.p-1    
+                                a.dropdown-item.common-text-color.text-center(href="/register") Üye Ol

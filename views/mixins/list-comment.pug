@@ -2,62 +2,81 @@ include ../mixins/add-reply.pug
 include ../mixins/add-comment.pug
 
 mixin createComment(blog)
+    
     if blog.comments.length > 0
         each comment in blog.comments
-            .container(style="height: 1rem;")
-            .card(style="width: 35rem;").mx-auto 
-                .card-body
-                    .row
-                        .col-xs-10.col-sm-10 
-                            .row
-                                .col-xs-4.col-sm-4
+
+            .container
+                .card.common-size.mx-auto 
+                    .card-body
+                        
+                        .flex.row
+                            .d-flex.justify-content-around.align-items-center
+                                
+                                div.text-end
                                     small 
                                         strong #{comment.user.name}
-                                .col-xs-8.col-sm-8
+                                 
+                                div
                                     small    
                                         p #{comment.message}
-                        .col-xs-2.col-sm-2
-                            .row
-                                .col-xs-1.col-sm-1
-                                    if isAuthenticated
-                                        if user.email == comment.user.email || isAdmin
-                                            form(action=`/delete-comment/${comment._id}` method='POST')
-                                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                input(type="hidden" name="blogid" value=`${blog._id}`)
-                                                button(type='submit').btn.btn-secondary-outline.btn-sm
-                                                    img(src="/img/delete.png" width="10" height="10")
-                                .col-xs-1.col-sm-1
-                                    if isAuthenticated   
-                                        button(type="button" data-bs-toggle="collapse" data-bs-target=`#replyArea${comment._id}` ).btn.btn-secondary-outline.btn-sm 
-                                            img(src="/img/reply.png" width="13" heigth="13")
-                if comment.replies.length > 0
-                        each reply in comment.replies
-                            .row
-                                .col-xs-10.col-sm-10.mx-auto
-                                    .row
-                                        .col-xs-10.col-sm-10
-                                            .row 
-                                                .col-xs-4.col-sm-4
-                                                    small 
-                                                        strong #{reply.user.name}
-                                                .col-xs-8.col-sm-8
-                                                    small 
-                                                        p #{reply.reply} 
-                                        if isAuthenticated
-                                            if user.email == reply.user.email || isAdmin
-                                                .col-xs-2.col-sm-2   
-                                                    form(action=`/delete-reply/${reply._id}` method='POST')
-                                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                        input(type="hidden" name="blogid" value=`${blog._id}`)
-                                                        button(type='submit').btn.btn-secondary-outline.btn-sm
-                                                            img(src="/img/delete.png" width="10" height="10")
-                .container.collapse(id=`replyArea${comment._id}`)
-                    .row 
-                        .col-xs-2.col-sm-2
-                        .col-xs-10.col-sm-10.mx-auto
-                            +replyArea(blog, comment)
-                .container(style="height: 1rem;") 
-        .container(style="height: 1rem;")        
+                                
+                                div
+                                    .flex-column 
+                                        .d-flex.justify-content-end
+                                            div
+                                                if isAuthenticated
+                                                    if user.email == comment.user.email || isAdmin
+                                                        form(action=`/delete-comment/${comment._id}` method='POST')
+                                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                            input(type="hidden" name="blogid" value=`${blog._id}`)
+                                                            button(type='submit').btn.btn-secondary-outline.border-0
+                                                                img(src="/img/delete.png" width="10" height="10")
+                                            div
+                                                if isAuthenticated   
+                                                    button(type="button" data-bs-toggle="collapse" data-bs-target=`#replyArea${comment._id}` ).btn.btn-secondary-outline.border-0
+                                                        img(src="/img/reply.png" width="13" heigth="13")
+
+                        
+                        .container.collapse(id=`replyArea${comment._id}`)
+                            if comment.replies.length > 0
+                                each reply in comment.replies
+                                    .flex.row
+                                        .d-flex.justify-content-around.align-items-center
+                                            div
+                                                small 
+                                                    strong #{reply.user.name}
+                                            div
+                                                small 
+                                                    p #{reply.reply} 
+                                            div
+                                                if isAuthenticated
+                                                    if user.email == reply.user.email || isAdmin
+                                                        .col-xs-2.col-sm-2   
+                                                            form(action=`/delete-reply/${reply._id}` method='POST')
+                                                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                                input(type="hidden" name="blogid" value=`${blog._id}`)
+                                                                button(type='submit').btn.btn-secondary-outline.border-0
+                                                                    img(src="/img/delete.png" width="10" height="10")
+                            .d-flex.justify-content-center   
+                                div
+                                    +replyArea(blog, comment)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    .container.collapse(id=`replyArea${comment._id}`)
+                        .row 
+                            .col-xs-2.col-sm-2
+                            .col-xs-10.col-sm-10.mx-auto
+                                +replyArea(blog, comment)
+                            
         .container
             if isAuthenticated
                 +commentArea(blog)
