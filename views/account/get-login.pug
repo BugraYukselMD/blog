@@ -1,35 +1,49 @@
 extends ../layouts/main-layout.pug
 
 block content
-    .container    
-        if errorMessage
-            .container.mx-auto
-                .alert.alert-danger !{errorMessage}
-        .container(style="height: 1rem;")
-        .card(style="width: 25rem;").mx-auto 
-            .card-body
-                form(action="/login" method="POST")
-                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                    .container(style="height: 1rem;")
-                    .row
-                        .col-xs-4.col-sm-4
-                            label(for="email").col-form-label Mail Adresi
-                        .col-xs-8.col-sm-8
+    
+    if errorMessage
+        
+        .container.common-size.mx-auto
+            .alert.alert-danger !{errorMessage}
+    
+    .container.for-spacing
+    
+    .card.border-0.common-size.mx-auto 
+        .card-body
+            
+            form(action="/login" method="POST")
+                
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                
+                .container.for-spacing
+                
+                .row
+                    .d-flex.flex-xs-column.justify-content-center
+                        .text-center
+                            label(for="email").col-form-label.common-text-color 
+                                strong Mail Adresi
+                    .d-flex.flex-xs-column.justify-content-center    
+                        div
                             input.form-control#name(type="text" name="email")   
 
-                    .row
-                        .col-xs-4.col-sm-4
-                            label(for="password").col-form-label Şifre
-                        .col-xs-8.col-sm-8
+                .container.for-spacing
+
+                .row.mx-auto
+                    .d-flex.flex-xs-column.justify-content-center
+                        .text-center
+                            label(for="password").col-form-label.common-text-color 
+                                strong Şifre
+                    .d-flex.flex-xs-column.justify-content-center    
+                        div 
                             input.form-control#password(type="password" name="password")  
-                    .container(style="height: 1rem;")      
-                    .row
-                        .col-xs-4.col-sm-4 
-                        .col-xs-4.col-sm-4.mx-auto
-                            input(type="submit" value="Giriş Yap").btn.colorChangeable 
-                        .col-xs-4.col-sm-4 
-                    .row
-                        .col-xs-3.col-sm-3 
-                        .col-xs-6.col-sm-6.mx-auto
-                            a(href="/reset-password").btn.btn-link.p-0 Şifreni mi unuttun? 
-                        .col-xs-3.col-sm-3
+                
+                .container.for-spacing      
+                
+                .row
+                    .d-flex.justify-content-center
+                        input(type="submit" value="Giriş Yap").btn.common-content-color 
+                
+                .row
+                    .d-flex.justify-content-center
+                        a(href="/reset-password").btn.btn-link.common-text-color Şifreni mi unuttun? 

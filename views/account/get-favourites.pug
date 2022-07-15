@@ -4,33 +4,47 @@ include ../mixins/createBlogFlow.pug
 block append content 
     if isAuthenticated
         if (action !== 'undefined' && action === 'deleted')
-            .container.mx-auto
-                .alert.alert-danger Blog favorilerinizden çıkarıldı
+            .container.common-size
+                .alert.alert-danger.text-center Blog favorilerinizden çıkarıldı
 
         if blogs.length > 0
-        .container(style="height: 1rem;")
-        .container
-            .row
-                .col-xs-5.col-sm-5
-                .col-xs-1.col-sm-1
-                    h5.mx-auto 
-                        strong.colorChangeableTxt  FAVORİLERİM
-                .col-xs-6.col-sm-6
-        each blog in blogs
-            .container(style="height: 1rem;")
-            .card(style="width: 40rem;").mx-auto 
-                .card-body
-                    .row
-                        .col-xs-5.col-sm-5 
-                            a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt 
-                                strong #{blog.title}   
-                        .col-xs-5.col-sm-5. 
-                            #{blog.date}
-                        .col-xs-1.col-sm-1
-                            form(action=`/delete-fav/${blog._id}` method='POST')
-                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                button(type='submit').btn.btn-secondary-outline
-                                    img(src="/img/delete.png" width="10" height="10")
-                    .container(style="height: 1rem;")
+            
+            .container.for-spacing
+            
+            .container.common-size.table-responsive
+                
+                table.table.table-hover
+                    
+                    thead.thead-light
+                        
+                        tr
+                            
+                            th(scope="col" colspan="3").mx-auto
+                                
+                                h5.text-center 
+                                    strong.common-text-color  FAVORİLERİM
+                   
+                    each blog in blogs
+                        
+                        tbody.mx-auto  
+                            
+                            tr
+                                
+                                td
+                                    
+                                    a(href=`/blog/${blog.urlExt}`).text-decoration-none.common-text-color
+                                        strong #{blog.title}   
+                                
+                                td 
+                                    p #{blog.date}
+                                
+                                td
+                                    form(action=`/delete-fav/${blog._id}` method='POST')
+                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                        button(type='submit').btn.btn-secondary-outline
+                                            img(src="/img/delete.png" width="10" height="10")
         else
-            h1 Favorilerinizde blog mevcut değil!
+            .container.for-spacing
+
+            .container.common-size.mx-auto
+                .alert.alert-secondary Favorilenmiş blog bulunamadı!

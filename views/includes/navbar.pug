@@ -1,7 +1,7 @@
 block append styles 
     link(rel="stylesheet" href="/css/navbar.css")
    
-nav.navbar-dark.colorChangeable.sticky-top
+nav.navbar-dark.common-content-color.sticky-top
     .container 
         .row.pt-3
             .container
@@ -37,16 +37,15 @@ nav.navbar-dark.colorChangeable.sticky-top
                         ul.dropdown-menu(aria-labelledby="dropdownToggler")
                             if isAuthenticated
                                 .row
-                                    .col-sm-7
+                                    .col
                                         li
-                                            a.dropdown-item(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'nav-link active':'nav-link')).text-light.colorChangeable.rounded.mx-auto Profilim   
+                                            a.dropdown-item(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'active':'') style="text-align: center;").text-light.colorChangeable.rounded Profilim   
                                         li
-                                            a.dropdown-item(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'nav-link active':'nav-link')).text-light.colorChangeable.rounded Favorilerim
-                                
-                                    .col-sm-5
-                                        li.pt-1
-                                            a.dropdown-item(href="/logout") 
-                                                img(src=`/img/logout.png` width="25" height="25")
+                                            a.dropdown-item(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'active':'') style="text-align: center;").text-light.colorChangeable.rounded Favorilerim
+                                .row
+                                    .col
+                                        a.dropdown-item(href="/logout" style="text-align: center;")
+                                            img(src=`/img/logout.png` width="25" height="25")
                             else 
                                 li
                                     a.dropdown-item(href="/login") Giriş Yap

@@ -3,40 +3,61 @@ include ../mixins/createBlogFlow.pug
 
 block append content 
     if (action !== 'undefined' && action === 'deleted')
-        .container(style="width: 40rem;").mx-auto
+       
+        .container.for-spacing
+
+        .container.common-size.mx-auto
             .alert.alert-danger Blog silindi
 
     if (action !== 'undefined' && action === 'updated')
-        .container(style="width: 40rem;").mx-auto
+        
+        .container.for-spacing
+
+        .container.common-size.mx-auto
             .alert.alert-success Blog başarıyla güncellendi
 
     if blogs.length > 0
-        .container(style="height: 1rem;")
-        .container
-            .row
-                .col-xs-5.col-sm-5
-                .col-xs-1.col-sm-1
-                    h5.mx-auto 
-                        strong.colorChangeableTxt  YAZILARIM
-                .col-xs-6.col-sm-6
-        each blog in blogs
-            .container(style="height: 1rem;").mx-auto
-            .card(style="width: 40rem;").mx-auto 
-                .card-body
-                    .row
-                        .col-xs-5.col-sm-5 
-                            a(href=`/blog/${blog.urlExt}`).text-decoration-none.colorChangeableTxt 
-                                strong #{blog.title}   
-                        .col-xs-5.col-sm-5. 
-                            #{blog.date}
-                        .col-xs-1.col-sm-1 
-                            a.btn.btn-secondary-outline.btn-sm.mr-2(href=`/admin/edit-blog/${blog.urlExt}`) 
-                                img(src="/img/edit.png" width="18" height="18")
-                        .col-xs-1.col-sm-1 
-                            form(action='/admin/delete-blog' method='POST')
-                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                input(type='hidden' name='blogid' value=`${blog._id}`)
-                                button(type='submit').btn.btn-secondary-outline.btn-sm 
-                                    img(src="/img/delete.png" width="10" height="10")
+        
+        .container.for-spacing
+
+        .container.common-size.table-responsive
+            
+            table.table.table-hover
+                
+                thead.thead-light
+                    
+                    tr
+                        
+                        th(scope="col" colspan="4").mx-auto
+                            
+                            h5.text-center 
+                                strong.common-text-color  YAZILARIM
+                
+                each blog in blogs
+                    
+                    tbody.mx-auto  
+                        
+                        tr
+                            
+                            td
+                                a(href=`/blog/${blog.urlExt}`).text-decoration-none.common-text-color
+                                    strong #{blog.title}   
+                            
+                            td 
+                                p #{blog.date}
+                            
+                            td 
+                                a.btn.btn-secondary-outline.btn-sm.mr-2(href=`/admin/edit-blog/${blog.urlExt}`) 
+                                    img(src="/img/edit.png" width="18" height="18")
+                    
+                            td
+                                form(action='/admin/delete-blog' method='POST')
+                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                    input(type='hidden' name='blogid' value=`${blog._id}`)
+                                    button(type='submit').btn.btn-secondary-outline.btn-sm 
+                                        img(src="/img/delete.png" width="10" height="10")                       
     else
-        h1 Blog Yazıları Güncellenemedi
+        .container.for-spacing
+
+        .container.common-size.mx-auto
+            .alert.alert-secondary Blog bulunamadı!

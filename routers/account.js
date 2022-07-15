@@ -10,7 +10,7 @@ router.get('/login', locals, controller.getLogin);
 router.get('/register', locals, controller.getRegister);
 router.get('/favourites/:userExt', locals, isAdmin, controller.getFavourites);
 router.get('/profile/:userExt', locals, isAdmin, controller.getProfile);
-router.get('/reset-password', locals, isAdmin, controller.getReset);
+router.get('/reset-password', locals, controller.getReset);
 router.get('/reset-password/:token', locals, isAdmin, controller.getNewPassword);
 
 // for -post functions

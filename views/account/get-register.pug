@@ -1,45 +1,63 @@
 extends ../layouts/main-layout.pug
 
 block content
-    .container
-        if errorMessage
-            .container.mx-auto
-                .alert.alert-danger !{errorMessage}
-        .container(style="height: 1rem;")
-        .card(style="width: 30rem;").mx-auto
-            .card-body 
-                form(action="/register" method="POST" enctype="multipart/form-data")
-                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                    input(type="file" name="image" id="custom-file-chooser" hidden)
-                    .container(style="height: 1rem;")
-                    .row
-                        .col-xs-4.col-sm-4
-                            label(for="name").col-form-label Kullanıcı Adı
-                        .col-xs-8.col-sm-8
+    
+    if errorMessage
+        
+        .container.common-size.mx-auto
+            .alert.alert-danger !{errorMessage}
+    
+    .container.for-spacing
+    
+    .card.border-0.common-size.mx-auto
+        .card-body 
+            
+            form(action="/register" method="POST" enctype="multipart/form-data")
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                input(type="file" name="image" id="custom-file-chooser" hidden)
+                
+                .container.for-spacing
+                
+                .row
+                    .d-flex.flex-xs-column.justify-content-center
+                        div.text-center
+                            label(for="name").col-form-label 
+                                strong.common-text-color Kullanıcı Adı
+                    .d-flex.flex-xs-column.justify-content-center
+                        div
                             input.form-control#name(type="text" name="name")  
 
-                    .row
-                        .col-xs-4.col-sm-4
-                            label(for="email").col-form-label Mail Adresi
-                        .col-xs-8.col-sm-8
+                .row
+                    .d-flex.flex-xs-column.justify-content-center
+                        div.text-center
+                            label(for="email").col-form-label 
+                                strong.common-text-color Mail Adresi
+                    .d-flex.flex-xs-column.justify-content-center
+                        div
                             input.form-control#email(type="text" name="email")    
 
-                    .row
-                        .col-xs-4.col-sm-4
-                            label(for="password").col-form-label Şifre
-                        .col-xs-8.col-sm-8
+                .row
+                    .d-flex.flex-xs-column.justify-content-center
+                        div.text-center
+                            label(for="password").col-form-label 
+                                strong.common-text-color Şifre
+                    .d-flex.flex-xs-column.justify-content-center
+                        div
                             input.form-control#password(type="password" name="password")  
 
-                    .row
-                        .col-xs-4.col-sm-4
-                            label(for="imageUrl").col-form-label Profil Fotoğrafı
-                        .col-xs-8.col-sm-8
-                            button(type="button").btn.btn-secondary-outline
+                .row
+                    .d-flex.flex-xs-column.justify-content-center
+                        div.text-center
+                            label(for="imageUrl").col-form-label 
+                                strong.common-text-color Profil Fotoğrafı
+                    .d-flex.flex-xs-column.justify-content-center
+                        div
+                            button(type="button").btn.btn-secondary-outline.border-0
                                 label(for="custom-file-chooser")
                                     img(src="/img/select.png" width="20" height="20")
-                    .container(style="height: 1rem;")
-                    .row
-                        .col-xs-4.col-sm-4
-                        .col-xs-4.col-sm-4
-                            input(type="submit" value="Üye Ol").btn.colorChangeable 
-                        .col-xs-4.col-sm-4
+                    
+                .container.for-spacing
+                
+                .row
+                    .d-flex.justify-content-center
+                        input(type="submit" value="Üye Ol").btn.common-content-color

@@ -1,7 +1,13 @@
-.colorChangeable{
+.common-content-color{
     background-color: #006432;
     color:white;
 }
-.colorChangeableTxt{
+.common-text-color{
     color: #006432;
+}
+.common-size{
+    width: 80%;
+}
+.for-spacing{
+    height:1rem;
 }
