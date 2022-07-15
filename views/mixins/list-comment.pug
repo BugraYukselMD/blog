@@ -11,15 +11,15 @@ mixin createComment(blog)
                     .card-body
                         
                         .flex.row
-                            .d-flex.justify-content-around.align-items-center
+                            .d-flex.justify-content-between.align-items-center
                                 
                                 div.text-end
                                     small 
-                                        strong #{comment.user.name}
+                                        strong.common-text-color #{comment.user.name}
                                  
-                                div
-                                    small    
-                                        p #{comment.message}
+                                div.text-center
+                                    small.   
+                                        #{comment.message}
                                 
                                 div
                                     .flex-column 
@@ -38,50 +38,36 @@ mixin createComment(blog)
                                                         img(src="/img/reply.png" width="13" heigth="13")
 
                         
-                        .container.collapse(id=`replyArea${comment._id}`)
+                        .container.collapse(id=`replyArea${comment._id}`)            
                             if comment.replies.length > 0
                                 each reply in comment.replies
-                                    .flex.row
-                                        .d-flex.justify-content-around.align-items-center
-                                            div
-                                                small 
-                                                    strong #{reply.user.name}
-                                            div
-                                                small 
-                                                    p #{reply.reply} 
-                                            div
-                                                if isAuthenticated
-                                                    if user.email == reply.user.email || isAdmin
-                                                        .col-xs-2.col-sm-2   
-                                                            form(action=`/delete-reply/${reply._id}` method='POST')
-                                                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                                input(type="hidden" name="blogid" value=`${blog._id}`)
-                                                                button(type='submit').btn.btn-secondary-outline.border-0
-                                                                    img(src="/img/delete.png" width="10" height="10")
-                            .d-flex.justify-content-center   
-                                div
-                                    +replyArea(blog, comment)
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    .container.collapse(id=`replyArea${comment._id}`)
-                        .row 
-                            .col-xs-2.col-sm-2
-                            .col-xs-10.col-sm-10.mx-auto
-                                +replyArea(blog, comment)
-                            
+                                    .container
+                                        .flex.row
+                                            .d-flex.justify-content-between.align-items-center
+                                                div
+                                                    small 
+                                                        strong.common-text-color #{reply.user.name}
+                                                div
+                                                    small.
+                                                        #{reply.reply} 
+                                                div
+                                                    if isAuthenticated
+                                                        if user.email == reply.user.email || isAdmin
+                                                                form(action=`/delete-reply/${reply._id}` method='POST')
+                                                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                                    input(type="hidden" name="blogid" value=`${blog._id}`)
+                                                                    button(type='submit').btn.btn-secondary-outline.border-0
+                                                                        img(src="/img/delete.png" width="10" height="10")
+                            .container    
+                                +replyArea(blog, comment)                   
+        
         .container
             if isAuthenticated
                 +commentArea(blog)
             else 
-                .alert.alert-warning.mx-auto Yorum yapmak için lütfen giriş yapınız.
+                .container.for-spacing
+
+                .container.common-size.mx-auto
+                    .alert.alert-warning Yorum yapmak için lütfen giriş yapınız.
     else 
-        .row
             
