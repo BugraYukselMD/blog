@@ -9,5 +9,9 @@
     width: 80%;
 }
 .for-spacing{
-    height:1rem;
+    height:1vh;
+}
+
+.card{
+    background-color: mintcream;
 }

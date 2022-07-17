@@ -4,26 +4,18 @@ include ../mixins/createBlogFlow.pug
 block append content 
     if errorMessage
         .container.mx-auto
-            .alert.alert-warning !{errorMessage}
+            .alert.alert-warning.text-center !{errorMessage}
     if blogs.length > 0
         .container
-            each blog in blogs
+            each blog in blogs.reverse()
                 .flex-row
                     .d-flex.justify-content-center.p-2
                         .container
                             +createBlogFlow(blog)
-        
-                if !(isFull)
-                    .container.for-spacing
-                    .d-flex.justify-content-center.p-2
-                        form(action=`/` method='POST')
-                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                            button(type='submit').btn.btn-secondary-outline.border-0
-                                img(src="/img/loadmore.png" width="30" height="30")
     
     else 
         
         .container.for-spacing
 
         .container.common-size.mx-auto
-            .alert.alert-secondary Blog yazıları yüklenemedi. Lütfen sayfayı yenileyiniz.
+            .alert.alert-secondary.text-center Blog yazıları yüklenemedi. Lütfen sayfayı yenileyiniz.

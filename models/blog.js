@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { intersection } = require('underscore');
 const User = require('./user');
 
 
@@ -17,7 +18,7 @@ const blogSchema = mongoose.Schema({
         required: true,
         trim: true
     },
-    subject: String,
+    readMin: Number,
     body: {
         type: String,
         required: true,

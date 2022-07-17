@@ -28,7 +28,16 @@ head
                         .col-sm-2
                             label(for="title").form-label Blog Başlığı
                         .col-sm-6.mx-auto
-                            input.form-control(type="text" name="title" value= `${input.title}`)               
+                            input.form-control#title(type="text" name="title" value= `${input.title}`)               
+                    br
+                    .row
+                        .col-sm-2
+                            label(for="readMin").form-label Tahmini Okuma Süresi
+                        .col-sm-6.mx-auto
+                            input.slider-form-range#readMin.border-0(type="range" name="readMin" min="1" max="20" step="1" style="accent-color: #006432;")
+                            div.text-center
+                                small
+                                    strong#out(style="color: #006432;")   
                     br
                     .row 
                         .col-sm-2

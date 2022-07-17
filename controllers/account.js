@@ -463,6 +463,7 @@ module.exports.postEditProfile = (req,res,next)=>{
         req.session.user = updatedUser;
         req.session.favourites = updatedUser.favourites;
         res.redirect(`/profile/${updatedUser.urlExt}`)
+        return 0
     })
     .then(()=>{
         if (image) {

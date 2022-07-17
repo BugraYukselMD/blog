@@ -3,43 +3,11 @@ const Blog = require('../models/blog');
 module.exports.getIndex = (req,res,next)=>{
     var errorMessage = req.session.errorMessage;
     delete req.session.errorMessage;
-    var listCount = 1;
-    req.session.listCount = listCount;
     Blog.find()
         .then(blogs=>{
-            blogs = blogs.reverse().slice(0,listCount)
             res.render('public/index',{
                 title: "Blog Akışı",
                 path:'/',
-                listCount: listCount,
-                blogs:blogs,
-                errorMessage: errorMessage
-            });
-        })
-        .catch(err=>console.log(err))
-}
-
-module.exports.postIndex = (req,res,next)=>{
-    var errorMessage = req.session.errorMessage;
-    delete req.session.errorMessage;
-    
-    var listCount = req.session.listCount + 1;
-    req.session.listCount = listCount;
-
-    Blog.find()
-        .then(blogs=>{
-            blogs = blogs.reverse().slice(0, listCount)
-            if (listCount >= blogs.length){
-                listCount = blogs.length;
-                res.locals.isFull = true;
-            }
-            else{
-                res.locals.isFull = false;
-            }
-            res.render('public/index',{
-                title: "Blog Akışı",
-                path:'/',
-                listCount: listCount,
                 blogs:blogs,
                 errorMessage: errorMessage
             });

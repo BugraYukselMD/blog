@@ -9,8 +9,5 @@ router.get('/about', locals, controller.getAbout);
 router.get('/contact', locals, controller.getContact);
 router.get('/blog/:urlExt', locals, controller.getBlog);
 
-// for -get functions
-router.post('/', locals, controller.postIndex);
-
 
 module.exports = router;

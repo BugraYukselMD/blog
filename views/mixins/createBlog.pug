@@ -4,13 +4,19 @@ mixin createBlog(blog)
         .card-body
             
             .flex-row
-                .d-flex.justify-content-around
+                .d-flex.justify-content-between.align-items-start
                     .flex-column 
-                        .d-flex.justify-content-center
+                        .d-flex.justify-content-start
                             h4 
-                                strong.common-text-color #{blog.title}   
+                                strong.common-text-color #{blog.title} 
+                        
+                        .d-flex.justify-content-start.align-items-start
+                            small.text-muted #{blog.readMin} dakika
+                        
+                        .d-inline-flex.justify-content-start.align-items-start
+                            small.text-muted #{blog.date}  
                     .flex-column 
-                        .d-flex.justify-content-end
+                        .d-inline-flex.justify-content-end
                             div
                                 if isAuthenticated
                                     if !(inFav)
@@ -25,12 +31,12 @@ mixin createBlog(blog)
                                             input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                             button(type='submit').btn.btn-secondary-outline.border-0
                                                 img(src="/img/inFav.png" width="30" height="30")
-            hr
-            .flex-row
-                .d-flex.justify-content-center
-                    p !{blog.body}
+                        
+                        
+        hr
+   
+        .container
+            p !{blog.body}
 
-            .flex-row
-                .d-flex.justify-content-end
-                    small.text-muted #{blog.date}
+        hr
 

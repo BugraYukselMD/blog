@@ -2,23 +2,31 @@ extends ../layouts/main-layout.pug
 include ../mixins/createBlog.pug
 include ../mixins/list-comment.pug
 
+block append styles 
+    link(rel="stylesheet", href="css/get-blog.css")
+
 block append content 
 
-        if blog
-            br
-            .flex-row
-                .d-flex.justify-content-center
-                    .container
-                        +createBlog(blog)
-            .flex-row
-                .d-flex.justify-content-center
-                    .container
-                        +createComment(blog)
-  
-        else 
-            .container.for-spacing
+    if blog
+        
+        .container.for-spacing
 
-            .container.common-size.mx-auto
-                .alert.alert-secondary Blog bulunamadı!
+        .flex-row
+            .d-flex.justify-content-center
+                .container
+                    +createBlog(blog)
+
+        .container.for-spacing
+        
+        .flex-row
+            .d-flex.justify-content-center
+                .container
+                    +createComment(blog)
+
+    else 
+        .container.for-spacing
+
+        .container.common-size.mx-auto
+            .alert.alert-secondary.text-center Blog bulunamadı!
     
     

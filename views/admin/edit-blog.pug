@@ -25,12 +25,21 @@ body
             form(action=`/admin/edit-blog/${blog.urlExt}` method="POST")
                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                 input.form-control#blogBody(type="hidden" value= `${blog.body}`)
+                input.form-control#blogreadMin(type="hidden" value= `${blog.readMin}`)
                 .row
                     .col-sm-2
                         label(for="title").form-label Blog Başlığı
                     .col-sm-6.mx-auto
                         input.form-control(type="text" name="title" value= `${blog.title}`)               
                 br
+                .row
+                        .col-sm-2
+                            label(for="readMin").form-label Tahmini Okuma Süresi
+                        .col-sm-6.mx-auto
+                            input.slider-form-range#readMin.border-0(type="range" name="readMin" min="1" max="20" step="1" style="accent-color: #006432;")
+                            div.text-center
+                                small
+                                    strong#out(style="color: #006432;")
                 .row 
                     .col-sm-2
                         label(for="body").form-label Blog Yazısı
