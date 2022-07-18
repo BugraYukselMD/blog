@@ -1,13 +1,16 @@
 extends ../layouts/main-layout.pug 
 include ../mixins/createBlogFlow.pug
 
+block append styles 
+    link(rel="stylesheet", href="/css/index.css")
+
 block append content 
     if (action !== 'undefined' && action === 'deleted')
        
         .container.for-spacing
 
         .container.common-size.mx-auto
-            .alert.alert-danger.text-center Blog silindi
+            .alert.alert-danger.text-center.common-size Blog silindi
 
     if (action !== 'undefined' && action === 'updated')
         
@@ -19,8 +22,8 @@ block append content
     if blogs.length > 0
         
         .container.for-spacing
-
-        .container.common-size.table-responsive.table-shadow
+        
+        .container.table-shadow.table-responsive.index
             
             table.table.table-hover
                 
@@ -40,7 +43,7 @@ block append content
                         tr
                             
                             td
-                                a(href=`/blog/${blog.urlExt}`).text-decoration-none.common-text-color
+                                a(href=`/blog/${blog.urlExt}`).text-break.text-decoration-none.common-text-color
                                     strong #{blog.title}   
                             
                             td 

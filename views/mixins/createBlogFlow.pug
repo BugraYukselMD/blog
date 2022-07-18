@@ -1,11 +1,11 @@
 mixin createBlogFlow(blog)
     
-    .card.border-0.common-size.mx-auto 
+    .card.border-0.common-size.mx-auto.index 
         .card-body
            
             .flex-row
                 .d-flex.justify-content-start.align-items-start
-                    a.text-decoration-none.common-text-color(href=`/blog/${blog.urlExt}`)
+                    a.text-break.text-decoration-none.common-text-color(href=`/blog/${blog.urlExt}`)
                         strong #{blog.title}  
             
             .flex-row

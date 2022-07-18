@@ -1,6 +1,9 @@
 extends ../layouts/main-layout.pug 
 include ../mixins/createBlogFlow.pug
 
+block append styles 
+    link(rel="stylesheet", href="/css/index.css")
+
 block append content 
     if errorMessage
         .container.mx-auto

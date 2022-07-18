@@ -447,14 +447,14 @@ module.exports.postDeleteFavourite = (req,res,next)=>{
 module.exports.postEditProfile = (req,res,next)=>{
     const user = req.session.user;
     const name = req.body.name;
-    const image = req.file?req.file:user.imageUrl;
+    const image = req.file;
     const oldImg = user.imageUrl;
 
     User.updateOne({_id: user._id}, {
         $set: {
             name: name,
             urlExt: name.toLowerCase().replace(' ', '-'),
-            imageUrl: image.filename
+            imageUrl: req.file?req.file.filename:user.imageUrl
         }
     })
 

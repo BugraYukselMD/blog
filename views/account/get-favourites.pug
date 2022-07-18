@@ -1,6 +1,9 @@
 extends ../layouts/main-layout.pug 
 include ../mixins/createBlogFlow.pug
 
+block append styles 
+    link(rel="stylesheet", href="/css/index.css")
+
 block append content 
     if isAuthenticated
         if (action !== 'undefined' && action === 'deleted')
@@ -11,7 +14,7 @@ block append content
             
             .container.for-spacing
             
-            .container.common-size.table-responsive.table-shadow
+            .container.table-responsive.table-shadow.index 
                 
                 table.table.table-hover
                     
@@ -32,7 +35,7 @@ block append content
                                 
                                 td
                                     
-                                    a(href=`/blog/${blog.urlExt}`).text-decoration-none.common-text-color
+                                    a(href=`/blog/${blog.urlExt}`).text-break.text-decoration-none.common-text-color
                                         strong #{blog.title}   
                                 
                                 td 

@@ -8,7 +8,7 @@ nav.navbar-dark.common-content-color.sticky-top
                 a#navBrand.navbar-brand(href='/') GÜNDEN GÜNE DAHA İYİYE
      
     .flex-row
-        .d-flex.justify-content-center.p-2
+        .d-flex.justify-content-center
             div.p-2
                 a(href="/", class=(path === '/'?'nav-link active':'nav-link')) Anasayfa
 
@@ -18,6 +18,7 @@ nav.navbar-dark.common-content-color.sticky-top
             div.p-2
                 a(href="/contact", class=(path === '/contact'?'nav-link active':'nav-link')) İletişim
 
+       
             div
                 button.dropdown-toggle#dropdownToggler.btn.btn-secondary-outline.rounded-circle.border-0(type="button" data-bs-toggle="dropdown" aria-expanded='false')
                     img.rounded-circle(src=(user?`/uploads/${user.imageUrl}`: `/uploads/default.png`) width="35" height="35")
@@ -30,27 +31,27 @@ nav.navbar-dark.common-content-color.sticky-top
                             .d-flex.align-items-center
                                 .flex-column
                                     .d-flex.justify-content-center.p-1
-                                        a.dropdown-item.common-text-color.text-center(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'active':'')) Profilim   
+                                        a.dropdown-item.common-text-color.text-center(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'disabled':'')) Profilim   
                                     .d-flex.justify-content-center.p-1    
-                                        a.dropdown-item.common-text-color.text-center(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'active':'')) Favorilerim
-
-                                    if isAdmin
-                                        .d-flex.justify-content-center.p-1
-                                            a.dropdown-item.common-text-color.text-center(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) 
-                                                strong Blog Yaz
-                                        .d-flex.justify-content-center.p-1
-                                            a.dropdown-item.common-text-color.text-center(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) 
-                                                strong Yazılarım
+                                        a.dropdown-item.common-text-color.text-center(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'disabled':'')) Favorilerim
 
                                 .flex-column
                                     .d-flex.align-self-center
                                         div.align-self-stretch
                                             a.dropdown-item(href="/logout")
                                                 img(src=`/img/logout.png` width="25" height="25")
-                    
                     else 
                         .flex-row
                             .d-flex.justify-content-center.p-1
                                 a.dropdown-item.common-text-color.text-center(href="/login") Giriş Yap
                             .d-flex.justify-content-center.p-1    
                                 a.dropdown-item.common-text-color.text-center(href="/register") Üye Ol
+
+        .d-flex.justify-content-center
+            div
+                if isAdmin
+                    .d-flex.justify-content-center
+                        div.p-2
+                            a.dropdown-item.text-center(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
+                        div.p-2
+                            a.dropdown-item.text-center(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım           
