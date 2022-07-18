@@ -11,7 +11,7 @@ block append content
             
             .container.for-spacing
             
-            .container.common-size.table-responsive
+            .container.common-size.table-responsive.table-shadow
                 
                 table.table.table-hover
                     
@@ -41,7 +41,7 @@ block append content
                                 td
                                     form(action=`/delete-fav/${blog._id}` method='POST')
                                         input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                        button(type='submit').btn.btn-secondary-outline
+                                        button(type='submit').btn.btn-secondary-outline.border-0
                                             img(src="/img/delete.png" width="10" height="10")
         else
             .container.for-spacing

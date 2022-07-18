@@ -2,7 +2,6 @@ const User = require('../models/user');
 const Login = require('../models/login');
 const Blog = require('../models/blog');
 const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
@@ -15,8 +14,8 @@ var transporter = nodemailer.createTransport({
     requireTLS: true,
     service: 'gmail',
     auth: {
-        user: 'onlygreyhat@gmail.com',
-        pass: 'iwomvhmqwykeybml'
+        user: 'drbugrayukselofficial@gmail.com',
+        pass: 'sbeazngtneinhjzk'
     }
 });
 
@@ -37,7 +36,7 @@ module.exports.getFavourites = (req,res,next)=>{
     .then(blogs=>{
         res.render('account/get-favourites',{
             title: "Favorilerim",
-            path:'/favourites',
+            path:`/favourites`,
             blogs: blogs,
             action: action
         });
@@ -54,7 +53,7 @@ module.exports.getProfile = (req,res,next)=>{
     }
 
     res.render('account/get-profile', {
-        path: '/profile',
+        path: `/profile`,
         title: 'Profilim',
         errorMessage: errorMessage
     });
@@ -149,7 +148,7 @@ module.exports.postRegister = (req,res,next)=>{
     const image = req.file;
     const urlExt = name.toLowerCase().replace(' ', '-');
 
-    User.findOne({$or:[{email: email}, {name:name}]})
+    User.findOne({email: email})
     .then(user => {
         if(user){
             if(user.name == name && user.email == email) {
@@ -187,7 +186,7 @@ module.exports.postRegister = (req,res,next)=>{
     .then(() => {
 
         var mailOptions = {
-            from: "onlygreyhat@gmail.com",
+            from: "drbugrayukselofficial@gmail.com",
             to: email,
             subject: 'Hesap Aktivasyonu',
             html: '<h1>Hesabınız başarılı bir şekilde oluşturuldu!</h1>'
@@ -255,7 +254,7 @@ module.exports.postReset = (req,res,next)=>{
                 
                 res.redirect('/');
                 var mailOptions = {
-                    from: "onlygreyhat@gmail.com",
+                    from: "drbugrayukselofficial@gmail.com",
                     to: email,
                     subject: 'Şifre Yenileme',
                     html: `
@@ -337,7 +336,7 @@ module.exports.postNewPassword = (req,res,next)=>{
 module.exports.postComment = (req,res,next)=>{
     const urlExt = req.params.urlExt;
     const message = req.body.comment;
-    const user = {name: req.session.user.name, email: req.session.user.email};
+    const user = req.session.user;
     
     Blog.findOne({urlExt: urlExt})
     .then(blog=>{
@@ -353,7 +352,7 @@ module.exports.postReply = (req,res,next)=>{
     const urlExt = req.params.urlExt;
     const messageid = req.params.messageid;
     const reply = req.body.reply;
-    const user = {name: req.session.user.name, email: req.session.user.email};
+    const user = req.session.user;
     
     Blog.findOne({urlExt:urlExt})
     .then(blog => {
@@ -422,6 +421,9 @@ module.exports.postAddFavourites = (req,res,next)=>{
         user.addFavourites(blogid)
         req.session.user = user;
         req.session.favourites = user.favourites;
+        return user;
+    })
+    .then(user=>{
         res.redirect(`/favourites/${user.urlExt}`)
     })
     }  

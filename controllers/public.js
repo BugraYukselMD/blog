@@ -1,4 +1,6 @@
 const Blog = require('../models/blog');
+const User = require('../models/user');
+const mongoose = require('mongoose');
 
 module.exports.getIndex = (req,res,next)=>{
     var errorMessage = req.session.errorMessage;
@@ -31,8 +33,10 @@ module.exports.getContact = (req,res,next)=>{
 
 module.exports.getBlog = (req,res,next)=>{
     Blog.findOne({urlExt: req.params.urlExt})
-    .then(blog=>{
-        
+    .populate('comments.user')
+    .populate('comments.replies.user')
+
+    .then(blog=>{ 
         var inFav = false;
         if(req.session.favourites){
             req.session.favourites.map(fav=>{
@@ -46,7 +50,7 @@ module.exports.getBlog = (req,res,next)=>{
         res.render('public/get-blog',{
             title: blog.title,
             blog: blog
-        });
-    })
+            });
+        })
     .catch(err=>console.log(err));
 }

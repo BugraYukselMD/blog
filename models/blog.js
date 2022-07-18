@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { intersection } = require('underscore');
 const User = require('./user');
 
 
@@ -35,8 +34,8 @@ const blogSchema = mongoose.Schema({
                 type: mongoose.Types.ObjectId
             },
             user: {
-                name: String,
-                email: String,
+                type: mongoose.Types.ObjectId,
+                ref: "User",
             },
             message: {
                 type: String,
@@ -53,8 +52,8 @@ const blogSchema = mongoose.Schema({
                 reply:
                     {type: String},
                 user: {
-                    name: String,
-                    email: String
+                    type: mongoose.Types.ObjectId,
+                    ref: "User",
                 },
                 date: {
                     type: Date,
@@ -130,5 +129,6 @@ blogSchema.methods.deleteReply = function(replyid){
     return this.save()
     
 }
+
 
 module.exports = mongoose.model('Blog', blogSchema);

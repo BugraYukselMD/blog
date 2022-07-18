@@ -19,10 +19,7 @@ module.exports.getAddBlog = (req,res,next)=>{
     res.render('admin/add-blog', {
         title: "Blog Ekle",
         path:'/add-blog',
-        input: {
-            title:'',
-            body:''
-        },
+        
     });
 }
 
@@ -87,7 +84,7 @@ module.exports.postDeleteBlog = (req,res,next)=>{
     const blogid = req.body.blogid;
 
     Blog.deleteOne({_id: blogid})
-        .then(result=>{
+        .then(()=>{
             res.redirect('/admin/blogs?action=deleted')
         })
         .catch(err=>console.log(err))

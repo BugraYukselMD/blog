@@ -42,12 +42,9 @@ userSchema.methods.deleteFavourite = function(blogid){
     const currentFavourites = [...this.favourites];
     const updatedFavourites = [];
 
-    currentFavourites.map(favourite=>{
-        if(favourite.toString() == blogid){
-            return;
-        }
-        else{
-            updatedFavourites.push(favourite)
+    currentFavourites.forEach(favourite=>{
+        if(!(favourite.toString() == blogid.toString())){
+            updatedFavourites.push(favourite);
         }
     })
 
