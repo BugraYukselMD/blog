@@ -4,7 +4,7 @@ include ../mixins/list-comment.pug
 
 block append styles 
     link(rel="stylesheet", href="/css/get-blog.css")
-
+   
 block append content 
 
     if blog
@@ -17,16 +17,32 @@ block append content
                     +createBlog(blog)
 
         .container.for-spacing
+        .container.for-spacing 
         
-        .flex-row
-            .d-flex.justify-content-center
-                .container
+
+        .container
+            .card-group.common-size.mx-auto
+                .row.row-cols-lg-3.row-cols-md-2.row-cols-sm-1.row-cols-xs-1.g-2.mx-auto
                     +createComment(blog)
+        
+        .container.for-spacing 
+        .container.for-spacing
+        
+        if isAuthenticated
+            .flex-row
+                .d-flex.justify-content-center
+                    .container
+                            +commentArea(blog)
+        
+        else 
+            .container.for-spacing
+
+            .container.common-size.mx-auto
+                .alert.alert-warning.text-center Yorum yapmak için lütfen giriş yapınız.
 
     else 
         .container.for-spacing
 
         .container.common-size.mx-auto
             .alert.alert-secondary.text-center Blog bulunamadı!
-    
-    
+     

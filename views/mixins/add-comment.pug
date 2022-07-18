@@ -1,14 +1,14 @@
 mixin commentArea(blog)
-    
-    .card.border-0.common-size.mx-auto 
-        .card-body.mx-auto
-            form(action="" method="POST")
-                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+    .flex-row
+        .card.border-0.common-size.mx-auto 
+            .card-body.mx-auto
+                form(action="" method="POST")
+                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
 
-                .d-flex.justify-content.center.align-items-center
-                    div 
-                        input.form-control(type="text" id="Comment" name="comment" placeholder="Yorum yaz...") 
+                    .d-flex.justify-content.between.align-items-center
+                        div 
+                            input.form-control(type="text" id="Comment" name="comment" placeholder="Yorum yaz...") 
 
-                    div    
-                        button(type="submit" value="Yorumu Yayınla").btn.btn-secondary-outline.border-0
-                            img(src="/img/send.png" width="45" height="45")
+                        div    
+                            button(type="submit" value="Yorumu Yayınla").btn.btn-secondary-outline.border-0
+                                img(src="/img/send.png" width="45" height="45")

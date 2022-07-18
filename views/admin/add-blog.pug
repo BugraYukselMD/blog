@@ -20,7 +20,7 @@ head
         br
     br
     body    
-        .card.border-0(style="width: 80rem;").mx-auto
+        .card.border-0(style="width: 80rem;background-color: mintcream;box-shadow: 7px 5px 30px 5px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);transition: all .55s ease-in-out;").mx-auto
             .card-body 
                 form(action="/admin/add-blog" method="POST")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)

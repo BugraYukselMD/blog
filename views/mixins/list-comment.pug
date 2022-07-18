@@ -5,68 +5,46 @@ mixin createComment(blog)
     
     if blog.comments.length > 0
         each comment in blog.comments
-            .card.common-size.mx-auto.comment 
-                .card-body
-                    .container
+            .col-lg-3.col-md-6.col-sm-12.col-xs-12
+                .card.mx-auto.card-blog
+                    .flex-row 
+                        .d-flex.justify-content-between.align-items-center
+                            
+                            div
+                                img.rounded-circle(src=(comment.user.imageUrl?`/uploads/${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35" title=`${comment.user.name}`)
+                            
+                            div
+                                .d-flex.justify-content-center.align-items-center
+                                    if isAuthenticated
+                                        div
+                                            if user.email == comment.user.email || isAdmin
+                                                form(action=`/delete-comment/${comment._id}` method='POST')
+                                                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                    input(type="hidden" name="blogid" value=`${blog._id}`)
+                                                    button(type='submit').btn.btn-secondary-outline.border-0
+                                                        img(src="/img/delete.png" width="10" height="10")
+                                        div
+                                            button(type="button" data-bs-toggle="collapse" data-bs-target=`#replyArea${comment._id}` ).btn.btn-secondary-outline.border-0
+                                                img(src="/img/reply.png" width="13" heigth="13")
+                                        
+                                        if comment.replies.length > 0
+                                            div  
+                                                button(type="button" data-bs-toggle="collapse" data-bs-target=`#replies${comment._id}` ).btn.btn-secondary-outline.border-0
+                                                    img(src="/img/loadmore.png" width="13" heigth="13")
+                        .d-flex.justify-content-around.align-items-center
+                            .card-body.mx-auto
+                                p.text-break.text-start #{comment.message}                               
 
-                        .row  
-                            .col-xs-2.col-md-2
-                                div
-                                    img.rounded-circle(src=(comment.user.imageUrl?`/uploads/${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35")
-                            .col-xs-2.col-md-2      
-                                div.text-end
-                                    small 
-                                        strong.common-text-color #{comment.user.name}
-                            .col-xs-6.col-md-6         
-                                div.text-center
-                                    small.   
-                                        #{comment.message}                               
-                            .col-xs-2.col-md-2        
-                                    div
-                                        .btn-group  
-                                            
-                                            .btn.btn-secondary-outline.border-0.dropdown-toggle( data-bs-toggle = "dropdown")       
-                                            
-                                            div.dropdown-menu(role="menu").dropdown-comment
-                                                .flex.row
-                                                    .d-inline-flex.justify-content-center.align-items-center
-                                                        div
-                                                            if isAuthenticated
-                                                                if user.email == comment.user.email || isAdmin
-                                                                    form(action=`/delete-comment/${comment._id}` method='POST')
-                                                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                                                        input(type="hidden" name="blogid" value=`${blog._id}`)
-                                                                        button(type='submit').btn.btn-secondary-outline.border-0
-                                                                            img(src="/img/delete.png" width="10" height="10")
-                                                        div
-                                                            if isAuthenticated   
-                                                                button(type="button" data-bs-toggle="collapse" data-bs-target=`#replyArea${comment._id}` ).btn.btn-secondary-outline.border-0
-                                                                    img(src="/img/reply.png" width="13" heigth="13")
-                                                        
-                                                        if comment.replies.length > 0
-                                                            div  
-                                                                button(type="button" data-bs-toggle="collapse" data-bs-target=`#replies${comment._id}` ).btn.btn-secondary-outline.border-0
-                                                                    img(src="/img/loadmore.png" width="13" heigth="13")
 
-                        
-                    .container.collapse(id=`replies${comment._id}`)            
-                        if comment.replies.length > 0
-                            each reply in comment.replies
-                                .container
+                        .container.collapse(id=`replies${comment._id}`)            
+                            if comment.replies.length > 0
+                                each reply in comment.replies
                                     .flex.row
-                                        .d-flex.justify-content-around.align-items-center
-                                           
+                                        .d-flex.justify-content-center.align-items-center
+                                        
                                             div 
-                                                img.rounded-circle(src=(comment.user.imageUrl?`/uploads/${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35")    
+                                                img.rounded-circle(src=(comment.user.imageUrl?`/uploads/${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35" title=`${reply.user.name}`)    
                                             
-                                            div
-                                                small 
-                                                    strong.common-text-color #{reply.user.name}
-                                           
-                                            div
-                                                small.
-                                                    #{reply.reply} 
-
                                             div
                                                 if isAuthenticated
                                                     if user.email == reply.user.email || isAdmin
@@ -75,18 +53,11 @@ mixin createComment(blog)
                                                             input(type="hidden" name="blogid" value=`${blog._id}`)
                                                             button(type='submit').btn.btn-secondary-outline.border-0
                                                                 img(src="/img/delete.png" width="10" height="10")
-                    .container.collapse(id=`replyArea${comment._id}`)    
-                        .container    
-                            +replyArea(blog, comment)    
-            .container.for-spacing               
-    else 
-        
-    if isAuthenticated
-        +commentArea(blog)
-    else 
-        .container.for-spacing
+                                        .d-flex.justify-content-around.align-items-center
+                                            .text-break
+                                                p.
+                                                    #{reply.reply} 
 
-        .container.common-size.mx-auto
-            .alert.alert-warning.text-center Yorum yapmak için lütfen giriş yapınız.
-    
-            
+                        .container.collapse(id=`replyArea${comment._id}`)    
+                            +replyArea(blog, comment)                  
+    else 
