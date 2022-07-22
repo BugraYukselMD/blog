@@ -8,6 +8,7 @@ router.get('/', locals, controller.getIndex);
 router.get('/about', locals, controller.getAbout);
 router.get('/contact', locals, controller.getContact);
 router.get('/blog/:urlExt', locals, controller.getBlog);
+router.get('/linktree', locals, controller.getLinkTree);
 
 
 module.exports = router;

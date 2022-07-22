@@ -5,8 +5,9 @@ mixin createBlogFlow(blog)
            
             .flex-row
                 .d-flex.justify-content-start.align-items-start
-                    a.text-break.text-decoration-none.common-text-color(href=`/blog/${blog.urlExt}`)
-                        strong #{blog.title}  
+                    article
+                        a.text-break.text-decoration-none.common-text-color(href=`/blog/${blog.urlExt}`)
+                            strong #{blog.title}  
             
             .flex-row
                 .d-flex.justify-content-end.align-items-start

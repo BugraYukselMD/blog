@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Blog = require('../models/blog');
+const Link = require('../models/link');
 
 
 module.exports.getBlogs = (req,res,next)=>{
@@ -42,7 +43,7 @@ module.exports.postAddBlog = (req,res,next)=>{
     const readMin = req.body.readMin
     const body = req.body.editor;
     const urlExt = title.toLowerCase().replace(' ', "-");
-   ;
+
     const blog = new Blog({
         _id: mongoose.Types.ObjectId(),
         title: title,
@@ -88,4 +89,23 @@ module.exports.postDeleteBlog = (req,res,next)=>{
             res.redirect('/admin/blogs?action=deleted')
         })
         .catch(err=>console.log(err))
+}
+
+module.exports.postAddLink = (req,res,next)=>{
+    const linkName = req.body.linkName;
+    const linkUrl = req.body.linkUrl;
+    const image = req.file;
+
+    const link = new Link({
+        _id: mongoose.Types.ObjectId(),
+        linkName: linkName,
+        linkUrl: linkUrl,
+        linkImage: image?image.filename:undefined
+    });
+    link.save()
+        .then(()=>{
+            res.redirect('/linktree');
+        })
+        .catch(err=> console.log(err));
+
 }

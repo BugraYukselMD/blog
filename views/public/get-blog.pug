@@ -10,39 +10,38 @@ block append content
     if blog
         
         .container.for-spacing
-
-        .flex-row
-            .d-flex.justify-content-center
-                .container
-                    +createBlog(blog)
-
-        .container.for-spacing
-        .container.for-spacing 
-        
-
-        .container
-            .card-group.common-size.mx-auto
-                .row.row-cols-lg-3.row-cols-md-2.row-cols-sm-1.row-cols-xs-1.g-2.mx-auto
-                    +createComment(blog)
-        
-        .container.for-spacing 
-        .container.for-spacing
-        
-        if isAuthenticated
+        section
             .flex-row
                 .d-flex.justify-content-center
                     .container
-                            +commentArea(blog)
-        
-        else 
+                        +createBlog(blog)
+
+            .container.for-spacing
+            .container.for-spacing 
+            
+
+            .container
+                .card-group.common-size.mx-auto
+                    .row.row-cols-lg-3.row-cols-md-2.row-cols-sm-1.row-cols-xs-1.g-2.mx-auto
+                        +createComment(blog)
+            
+            .container.for-spacing 
             .container.for-spacing
             
-            .container.common-size.mx-auto
-                .alert.alert-warning.text-center Yorum yapmak için lütfen giriş yapınız.
+            if isAuthenticated
+                .flex-row
+                    .d-flex.justify-content-center
+                        .container
+                                +commentArea(blog)
+            
+            else 
+                .container.for-spacing
+                
+                .container.common-size.mx-auto
+                    .alert.alert-warning.text-center Yorum yapmak için lütfen giriş yapınız.
 
     else 
         .container.for-spacing
 
         .container.common-size.mx-auto
             .alert.alert-secondary.common-size.text-center Blog bulunamadı!
-     

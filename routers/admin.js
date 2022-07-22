@@ -13,5 +13,6 @@ router.get('/edit-blog/:urlExt', locals, isAdmin, controller.getEditBlog);
 router.post('/add-blog', locals, isAdmin, controller.postAddBlog);
 router.post('/edit-blog/:urlExt', locals, isAdmin, controller.postEditBlog);
 router.post('/delete-blog', locals, isAdmin, controller.postDeleteBlog);
+router.post('/linktree', locals, isAdmin, controller.postAddLink);
 
 module.exports = router;

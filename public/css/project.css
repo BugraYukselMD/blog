@@ -27,4 +27,6 @@
 .alert{
     width: 80%;
     margin: auto;
+    box-shadow: 7px 5px 30px 5px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    transition: all .55s ease-in-out;
 }

@@ -1,0 +1,73 @@
+extends ../layouts/main-layout.pug
+
+block append styles 
+    link(rel="stylesheet", href="/css/linktree.css")
+
+block append content 
+    if errorMessage
+        .container.mx-auto
+            .alert.alert-warning.text-center !{errorMessage}
+    section
+        .container.for-spacing 
+        
+        .flex-row 
+            .d-flex.justify-content-center.align-items-center 
+                img.rounded-circle.img(src="/img/headicon.jpg" width="150vh" height="150vh")
+        
+         
+        
+        if links.length > 0
+            each link in links
+                .container.for-spacing
+                .card.mx-auto(style="max-width:50vh") 
+                    .card-body
+                        a(href=`${link.linkUrl}`).text-decoration-none
+                            .flex-row 
+                                .d-flex.justify-content-between.align-items-stretch
+                                    div
+                                        img(src=`/uploads/${link.linkImage}` width="40vh" height="40vh")
+                                    div.text-center.mx-auto    
+                                        strong.common-text-color.link-name 
+                                            i #{link.linkName}
+            
+        if isAdmin 
+            .container.for-spacing
+            
+            .container.my-5
+                .card.mx-auto(style="max-width:60vh") 
+                    .card-body.mx-auto 
+                        .flex-row 
+                        
+                        .d-flex.justify-content-center.align-items-center
+                        
+                            form(action=`/admin/linktree` method="POST" enctype="multipart/form-data")
+                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                input(type="file" name="image" id="custom-file-chooser" hidden)
+
+                                .d-flex.justify-content-center.align-items-center  
+                                    div.text-center.p-2
+                                        label(for="image").col-form-label 
+                                            strong.common-text-color Link Iconu
+                                    div
+                                        button(type="button").btn.btn-secondary-outline.border-0
+                                            label(for="custom-file-chooser")
+                                                img(src="/img/select.png" width="20" height="20")
+                                
+                                .d-flex.justify-content-center.align-items-center  
+                                    div.text-center.p-2
+                                        label(for="linkName").col-form-label 
+                                            strong.common-text-color Link Adı
+                                    div
+                                        input.form-control(type="text" id="linkName" name="linkName" placeholder="Link adı...")
+                                
+                                .d-flex.justify-content-center.align-items-center  
+                                    div.text-center.p-2
+                                        label(for="linkUrl").col-form-label 
+                                            strong.common-text-color Link URL
+                                    div
+                                        input.form-control(type="text" id="linkUrl" name="linkUrl" placeholder="Link URL...")
+                                
+                                .d-flex.justify-content-center.align-items-center 
+                                    div.p-2
+                                        button(type="submit").btn.btn.common-content-color
+                                            strong Link Oluştur

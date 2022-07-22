@@ -2,17 +2,17 @@
 html(lang="en")
     
     include ../includes/head
-    include ../includes/navbar           
+    header
+        include ../includes/navbar           
     
     body
        
-        .container-fluid
+        main
             block content          
     
     include ../includes/script 
     
-    footer  
-        
+    footer   
         .container
             hr
             include ../includes/footer

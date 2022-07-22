@@ -1,6 +1,5 @@
 const Blog = require('../models/blog');
-const User = require('../models/user');
-const mongoose = require('mongoose');
+const Link = require('../models/link');
 
 module.exports.getIndex = (req,res,next)=>{
     var errorMessage = req.session.errorMessage;
@@ -53,4 +52,19 @@ module.exports.getBlog = (req,res,next)=>{
             });
         })
     .catch(err=>console.log(err));
+}
+
+module.exports.getLinkTree = (req,res,next)=>{
+    var errorMessage = req.session.errorMessage;
+    delete req.session.errorMessage;
+
+    Link.find()
+    .then(links=>{
+        res.render('public/get-linktree',{
+        title: "Beni Takip Edin!",
+        links:links,
+        errorMessage: errorMessage
+        });
+    })
+    .catch(err=>console.log(err));          
 }

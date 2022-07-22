@@ -17,7 +17,7 @@ const adminRouter = require('./routers/admin');
 const accountRouter = require('./routers/account');
 
 // MongoDB connection string
-const uri = process.env.MONGODB_URI || 'mongodb+srv://GhostITShell:GitS1995@gits.rcujn.mongodb.net/?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI || 'mongodb+srv://GhostITShell:GitS1995@gundengunedahaiyiye.mskkbh7.mongodb.net/?retryWrites=true&w=majority';
 
 // Store for sessions
 var store = new mongoDBStore({

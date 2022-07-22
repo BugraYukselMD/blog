@@ -7,8 +7,9 @@ mixin createBlog(blog)
                 .d-flex.justify-content-between.align-items-start
                     .flex-column 
                         .d-flex.justify-content-start
-                            h4 
-                                strong.common-text-color.text-break #{blog.title} 
+                            article
+                                h4 
+                                    strong.common-text-color.text-break #{blog.title} 
                         
                         .d-flex.justify-content-start.align-items-start
                             small.text-muted #{blog.readMin} dakika
@@ -36,7 +37,7 @@ mixin createBlog(blog)
         hr
         .container
             .text-break
-                p !{blog.body}
+                article !{blog.body}
 
         hr
 
