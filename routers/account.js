@@ -3,11 +3,12 @@ const router = express.Router();
 controller = require('../controllers/account');
 const locals = require('../middlewares/locals');
 const isAuthenticated = require('../middlewares/isAuthenticated');
+const isnotAuthenticated = require('../middlewares/isnotAuthenticated');
 
 // for -get functions
 router.get('/logout', locals, controller.getLogout);
-router.get('/login', locals, controller.getLogin);
-router.get('/register', locals, controller.getRegister);
+router.get('/login', locals,isnotAuthenticated, controller.getLogin);
+router.get('/register', locals, isnotAuthenticated, controller.getRegister);
 router.get('/favourites/:userExt', locals, isAuthenticated, controller.getFavourites);
 router.get('/profile/:userExt', locals, isAuthenticated, controller.getProfile);
 router.get('/reset-password', locals, isAuthenticated, controller.getReset);

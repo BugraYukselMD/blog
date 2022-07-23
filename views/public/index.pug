@@ -10,13 +10,12 @@ block append content
         .container.mx-auto
             .alert.alert-warning.text-center !{errorMessage}
     if blogs.length > 0
-        .container
-            each blog in blogs.reverse()
-                section
-                    .flex-row
-                        .d-flex.justify-content-center.p-2
-                            .container
-                                +createBlogFlow(blog)
+        
+        each blog in blogs.reverse()
+            section
+                .flex-row
+                    .d-flex.justify-content-center.p-2
+                        +createBlogFlow(blog)
     
     else 
         

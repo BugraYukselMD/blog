@@ -4,33 +4,30 @@ mixin createBlog(blog)
         .card-body
             
             .flex-row
-                .d-flex.justify-content-between.align-items-start
-                    .flex-column 
-                        .d-flex.justify-content-start
+                .d-flex.justify-content-between.align-items-stretch
+                    .col-9
+                        div
                             article
                                 strong.common-text-color.text-break.blog-title #{blog.title} 
                         
-                        .d-flex.justify-content-start.align-items-start
-                            small.text-muted.blog-footer #{blog.readMin} dakika
                         
-                        .d-inline-flex.justify-content-start.align-items-start
-                            small.text-muted.blog-footer #{blog.date}  
-                    .flex-column 
-                        .d-inline-flex.justify-content-end
-                            div
-                                if isAuthenticated
-                                    if !(inFav)
+                        div
+                            small.text-muted.index-footer #{blog.readMin } dakika  &#8226 #{blog.date}  
+                    .col-3
+                        .d-flex.justify-content-end.align-items-stretch
+                            if isAuthenticated
+                                if !(inFav)
+                                
+                                    form(action=`/favourites/${blog._id}` method='POST')
+                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                        button(type='submit').btn.btn-secondary-outline.border-0
+                                            img(src="/img/addFav.png" width="25" height="25")
+                                if inFav
                                     
-                                        form(action=`/favourites/${blog._id}` method='POST')
-                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                            button(type='submit').btn.btn-secondary-outline.border-0
-                                                img(src="/img/addFav.png" width="30" height="30")
-                                    if inFav
-                                        
-                                        form(action=`/delete-fav/${blog._id}` method='POST')
-                                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
-                                            button(type='submit').btn.btn-secondary-outline.border-0
-                                                img(src="/img/inFav.png" width="30" height="30")
+                                    form(action=`/delete-fav/${blog._id}` method='POST')
+                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                        button(type='submit').btn.btn-secondary-outline.border-0
+                                            img(src="/img/inFav.png" width="25" height="25")
                         
                         
         hr

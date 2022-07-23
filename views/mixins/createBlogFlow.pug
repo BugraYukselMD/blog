@@ -1,22 +1,19 @@
 mixin createBlogFlow(blog)
-    
-    
-    .card.border-0.common-size.mx-auto.index 
+
+    .card.index.border-0.mx-auto
         a(href=`/blog/${blog.urlExt}`).text-decoration-none
             .card-body
                 
                 .flex-row
-                    .d-flex.justify-content-center.align-items-center
-                        article
-                            p.text-break.common-text-color.index-title(href=`/blog/${blog.urlExt}`)
-                                strong #{blog.title}  
-                
-                .flex-row
-                    .d-flex.justify-content-end.align-items-start
-                        small.text-muted.index-footer #{blog.readMin} dakika
-                
-                .flex-row
-                    .d-flex.justify-content-end.align-items-start        
-                        small.text-muted.index-footer #{blog.date}
+                    .d-flex.justify-content-center.align-items-stretch
+                        div
+                            article
+                                p.text-break.common-text-color.index-title(href=`/blog/${blog.urlExt}`)
+                                    strong #{blog.title}  
+                    
+                    .d-flex.justify-content-end.align-items-stretch
+                        div
+                            small.text-muted.index-footer #{blog.readMin } dakika  &#8226 #{blog.date}
+
             
     
