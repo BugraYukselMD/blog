@@ -1,3 +1,9 @@
 .index{
-    max-width:60vh;
+    max-width:50rem;
+}
+.index-title{
+    font-size: x-large;
+}
+.index-footer{
+    font-size: medium;
 }

@@ -1,6 +1,6 @@
 mixin commentArea(blog)
     .flex-row
-        .card.border-0.common-size.mx-auto 
+        .card.border-0.card-add-comment.mx-auto 
             .card-body.mx-auto
                 form(action="" method="POST")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)

@@ -4,17 +4,17 @@ mixin createBlogFlow(blog)
         .card-body
            
             .flex-row
-                .d-flex.justify-content-start.align-items-start
+                .d-flex.justify-content-center.align-items-center
                     article
-                        a.text-break.text-decoration-none.common-text-color(href=`/blog/${blog.urlExt}`)
+                        a.text-break.text-decoration-none.common-text-color.index-title(href=`/blog/${blog.urlExt}`)
                             strong #{blog.title}  
             
             .flex-row
                 .d-flex.justify-content-end.align-items-start
-                    small.text-muted #{blog.readMin} dakika
+                    small.text-muted.index-footer #{blog.readMin} dakika
             
             .flex-row
                 .d-flex.justify-content-end.align-items-start        
-                    small.text-muted #{blog.date}
+                    small.text-muted.index-footer #{blog.date}
             
     
