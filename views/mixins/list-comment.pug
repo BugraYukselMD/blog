@@ -59,5 +59,6 @@ mixin createComment(blog)
                                                     #{reply.reply} 
 
                         .container.collapse(id=`replyArea${comment._id}`)    
+                            hr
                             +replyArea(blog, comment)                  
     else 

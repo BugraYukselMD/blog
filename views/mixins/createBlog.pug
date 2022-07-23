@@ -1,6 +1,6 @@
 mixin createBlog(blog)
     
-    .card.border-0.common-size.mx-auto 
+    .card.border-0.card-blog.mx-auto 
         .card-body
             
             .flex-row
@@ -8,14 +8,13 @@ mixin createBlog(blog)
                     .flex-column 
                         .d-flex.justify-content-start
                             article
-                                h4 
-                                    strong.common-text-color.text-break #{blog.title} 
+                                strong.common-text-color.text-break.blog-title #{blog.title} 
                         
                         .d-flex.justify-content-start.align-items-start
-                            small.text-muted #{blog.readMin} dakika
+                            small.text-muted.blog-footer #{blog.readMin} dakika
                         
                         .d-inline-flex.justify-content-start.align-items-start
-                            small.text-muted #{blog.date}  
+                            small.text-muted.blog-footer #{blog.date}  
                     .flex-column 
                         .d-inline-flex.justify-content-end
                             div

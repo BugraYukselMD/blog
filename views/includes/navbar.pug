@@ -34,6 +34,13 @@ nav.navbar-dark.common-content-color.sticky-top
                                         a.dropdown-item.common-text-color.text-center(href=`/profile/${user.urlExt}`, class=(path === '/profile'?'disabled':'')) Profilim   
                                     .d-flex.justify-content-center.p-1    
                                         a.dropdown-item.common-text-color.text-center(href=`/favourites/${user.urlExt}`, class=(path === '/favourites'?'disabled':'')) Favorilerim
+                                    .d-flex.justify-content-center
+                                    
+                                    if isAdmin
+                                        .d-flex.justify-content-center.p-1
+                                            a.dropdown-item.common-text-color.text-center(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
+                                        .d-flex.justify-content-center.p-1
+                                            a.dropdown-item.common-text-color.text-center(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım 
 
                                 .flex-column
                                     .d-flex.align-self-center
@@ -45,13 +52,4 @@ nav.navbar-dark.common-content-color.sticky-top
                             .d-flex.justify-content-center.p-1
                                 a.dropdown-item.common-text-color.text-center(href="/login") Giriş Yap
                             .d-flex.justify-content-center.p-1    
-                                a.dropdown-item.common-text-color.text-center(href="/register") Üye Ol
-
-        .d-flex.justify-content-center
-            div
-                if isAdmin
-                    .d-flex.justify-content-center
-                        div.p-2
-                            a.dropdown-item.text-center(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
-                        div.p-2
-                            a.dropdown-item.text-center(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım           
+                                a.dropdown-item.common-text-color.text-center(href="/register") Üye Ol          
