@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Blog = require('../models/blog');
 const Link = require('../models/link');
+const fs = require("fs");
 
 
 module.exports.getBlogs = (req,res,next)=>{
@@ -108,4 +109,23 @@ module.exports.postAddLink = (req,res,next)=>{
         })
         .catch(err=> console.log(err));
 
+}
+
+module.exports.postDeleteLink = (req,res,next)=>{
+    const linkid = req.params.linkid;
+   
+    Link.findByIdAndRemove({_id:linkid})
+    .then((link)=>{
+        
+        fs.unlink('public/uploads/' + link.linkImage, err => {
+            if (err) {
+                console.log(err);
+            }
+            });
+       
+        res.redirect('/linktree');    
+    })
+    .catch(err=> console.log(err))
+
+    
 }

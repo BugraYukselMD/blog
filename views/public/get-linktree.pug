@@ -19,7 +19,7 @@ block append content
         if links.length > 0
             each link in links
                 .container.for-spacing
-                .card.mx-auto(style="max-width:50vh") 
+                .card.mx-auto(style="max-width:40vh") 
                     .card-body
                         a(href=`${link.linkUrl}`).text-decoration-none
                             .flex-row 
@@ -29,6 +29,13 @@ block append content
                                     div.text-center.mx-auto    
                                         strong.common-text-color.link-name 
                                             i #{link.linkName}
+                                    
+                                    if isAdmin 
+                                        div 
+                                            form(action=`admin/delete-link/${link._id}` method='POST')
+                                                input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                                button(type='submit').btn.btn-secondary-outline.border-0
+                                                    img(src="/img/delete.png" width="10" height="10")
             
         if isAdmin 
             .container.for-spacing
