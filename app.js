@@ -15,6 +15,7 @@ const port = process.env.PORT || 3000
 const publicRouter = require('./routers/public');
 const adminRouter = require('./routers/admin');
 const accountRouter = require('./routers/account');
+const errorController = require('./controllers/error');
 
 // MongoDB connection string
 const uri = process.env.MONGODB_URI || 'mongodb+srv://GhostITShell:GitS1995@gundengunedahaiyiye.mskkbh7.mongodb.net/?retryWrites=true&w=majority';
@@ -60,6 +61,8 @@ app.use(session({
 app.use(publicRouter);
 app.use('/admin', adminRouter);
 app.use(accountRouter);
+app.use(errorController.get404Page)
+app.use(errorController.get500Page)
 
 app.set('view engine', 'pug');
 app.set('views', './views');
