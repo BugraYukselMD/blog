@@ -24,10 +24,7 @@ module.exports.getAbout = (req,res,next)=>{
 }
 
 module.exports.getContact = (req,res,next)=>{
-    res.render('public/get-contact',{
-        title: "İletişim",
-        path:'/contact'
-    });
+    res.redirect("/linktree");
 }
 
 module.exports.getBlog = (req,res,next)=>{

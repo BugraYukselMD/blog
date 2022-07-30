@@ -1,6 +1,7 @@
 #navBrand{
-    font-size: 2.5vh; /*divide px to 16*/
-    font-family: 'Josefin Sans', sans-serif;
+    font-size: 4.0vh;
+    font-family:'Josefin Sans', sans-serif;
+    
 }
 .nav-items{
     font-size: 2vh;

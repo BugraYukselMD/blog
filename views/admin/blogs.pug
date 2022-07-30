@@ -23,7 +23,7 @@ block append content
         
         .container.for-spacing
         
-        .container.table-shadow.table-responsive.index
+        .container.table-shadow.table-responsive.table-div
             
             table.table.table-hover
                 
@@ -43,21 +43,22 @@ block append content
                         tr
                             
                             td
-                                a(href=`/blog/${blog.urlExt}`).text-break.text-decoration-none.common-text-color
-                                    strong #{blog.title}   
+                                a(href=`/blog/${blog.urlExt}`).text-decoration-none.common-text-color
+                                    span.d-inline-block.text-truncate.pt-1    
+                                        strong #{blog.title}   
+                            
+                            td
+                                p.text-truncate.pt-1 #{blog.date}
                             
                             td 
-                                p #{blog.date}
-                            
-                            td 
-                                a.btn.btn-secondary-outline.border-0.mr-2(href=`/admin/edit-blog/${blog.urlExt}`) 
-                                    img(src="/img/edit.png" width="18" height="18")
+                                a.btn.btn-secondary-outline.border-0.pt-1(href=`/admin/edit-blog/${blog.urlExt}`) 
+                                    img(src="/img/edit.png" width="15" height="15")
                     
                             td
                                 form(action='/admin/delete-blog' method='POST')
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     input(type='hidden' name='blogid' value=`${blog._id}`)
-                                    button(type='submit').btn.btn-secondary-outline.border-0
+                                    button(type='submit').btn.btn-secondary-outline.border-0.pt-1
                                         img(src="/img/delete.png" width="10" height="10")                       
     else
         .container.for-spacing

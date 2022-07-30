@@ -64,7 +64,7 @@ module.exports.postEditBlog = (req,res,next)=>{
     const title = req.body.title;
     const readMin = req.body.readMin;
     const body = req.body.editor;
-    const newurlExt = title.toLowerCase().replace(' ', "-");
+    const newurlExt = title.toLowerCase().replace(" ", "-");
 
     Blog.updateOne({urlExt: urlExt}, {
         $set: {
