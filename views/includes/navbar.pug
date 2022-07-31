@@ -40,18 +40,21 @@ nav.navbar-dark.common-content-color.sticky-top
                                     
                                     if isAdmin
                                         .d-flex.justify-content-center.p-1
-                                            a.dropdown-item.common-text-color.text-center(href="/admin/add-blog", class=(path === '/add-blog'?'nav-link active':'nav-link')) Blog Yaz
+                                            a.dropdown-item.common-text-color.text-center(href="/admin/add-blog", class=(path === '/add-blog'?'disabled':'')) Blog Yaz
                                         .d-flex.justify-content-center.p-1
-                                            a.dropdown-item.common-text-color.text-center(href="/admin/blogs", class=(path === '/adminblogs'?'nav-link active':'nav-link')) Yazılarım 
+                                            a.dropdown-item.common-text-color.text-center(href="/admin/category", class=(path === '/category'?'disabled':'')) Kategorileri Düzenle
+                                        .d-flex.justify-content-center.p-1
+                                            a.dropdown-item.common-text-color.text-center(href="/admin/blogs", class=(path === '/adminblogs'?'disabled':'')) Yazılarım 
 
                                 .flex-column
                                     .d-flex.align-self-center
                                         div.align-self-stretch
                                             a.dropdown-item(href="/logout")
                                                 img(src=`/img/logout.png` width="25" height="25")
+
                     else 
                         .flex-row
                             .d-flex.justify-content-center.p-1
                                 a.dropdown-item.common-text-color.text-center(href="/login") Giriş Yap
                             .d-flex.justify-content-center.p-1    
-                                a.dropdown-item.common-text-color.text-center(href="/register") Üye Ol          
+                                a.dropdown-item.common-text-color.text-center(href="/register") Üye Ol   

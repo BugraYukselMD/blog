@@ -10,5 +10,7 @@ router.get('/contact', locals, controller.getContact);
 router.get('/blog/:urlExt', locals, controller.getBlog);
 router.get('/linktree', locals, controller.getLinkTree);
 
+// for -post functions
+router.post('/list-by-category', locals, controller.postList);
 
 module.exports = router;

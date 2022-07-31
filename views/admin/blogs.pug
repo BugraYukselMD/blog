@@ -23,7 +23,7 @@ block append content
         
         .container.for-spacing
         
-        .container.table-shadow.table-responsive.table-div
+        .container.table-shadow.table-responsive
             
             table.table.table-hover
                 
@@ -36,7 +36,7 @@ block append content
                             h5.text-center 
                                 strong.common-text-color  YAZILARIM
                 
-                each blog in blogs
+                each blog in blogs.reverse()
                     
                     tbody.mx-auto  
                         
@@ -44,21 +44,21 @@ block append content
                             
                             td
                                 a(href=`/blog/${blog.urlExt}`).text-decoration-none.common-text-color
-                                    span.d-inline-block.text-truncate.pt-1    
-                                        strong #{blog.title}   
+                                    span  
+                                        strong.text-break #{blog.title}   
                             
                             td
-                                p.text-truncate.pt-1 #{blog.date}
+                                p #{blog.date}
                             
                             td 
-                                a.btn.btn-secondary-outline.border-0.pt-1(href=`/admin/edit-blog/${blog.urlExt}`) 
+                                a.btn.btn-secondary-outline.border-0(href=`/admin/edit-blog/${blog.urlExt}`) 
                                     img(src="/img/edit.png" width="15" height="15")
                     
                             td
                                 form(action='/admin/delete-blog' method='POST')
                                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                     input(type='hidden' name='blogid' value=`${blog._id}`)
-                                    button(type='submit').btn.btn-secondary-outline.border-0.pt-1
+                                    button(type='submit').btn.btn-secondary-outline.border-0
                                         img(src="/img/delete.png" width="10" height="10")                       
     else
         .container.for-spacing

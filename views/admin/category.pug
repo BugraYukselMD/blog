@@ -1,0 +1,51 @@
+extends ../layouts/main-layout.pug
+
+block append styles 
+    link(rel="stylesheet", href="/css/category.css")
+
+block append content 
+    if errorMessage
+        .container.mx-auto
+            .alert.alert-warning.text-center !{errorMessage}
+    section
+        .container.for-spacing 
+        
+        if categories.length > 0
+            each category in categories
+                .container.for-spacing 
+                .card.mx-auto(style="max-width:40vh") 
+                    .card-body
+                        .flex-row 
+                            .d-flex.justify-content-between.align-items-stretch
+                                div.text-center.mx-auto    
+                                    strong.common-text-color.category-name 
+                                        i #{category.categoryName}                          
+                                div 
+                                    form(action=`/admin/delete-category/${category._id}` method='POST')
+                                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                                        button(type='submit').btn.btn-secondary-outline.border-0
+                                            img(src="/img/delete.png" width="10" height="10")
+             
+        .container.for-spacing
+        
+        .container.my-5
+            .card.mx-auto(style="max-width:60vh") 
+                .card-body.mx-auto 
+                    .flex-row 
+                    .d-flex.justify-content-center.align-items-center
+                    
+                        form(action=`/admin/add-category` method="POST")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            
+                            .d-flex.justify-content-center.align-items-center  
+                                div.text-center.p-2
+                                    label(for="categoryName").col-form-label 
+                                        strong.common-text-color Kategori Adı
+                                div
+                                    input.form-control(type="text" id="categoryName" name="categoryName" placeholder="Kategori adı...")
+                        
+                            
+                            .d-flex.justify-content-center.align-items-center 
+                                div.p-2
+                                    button(type="submit").btn.btn.common-content-color
+                                        strong Kategori Oluştur

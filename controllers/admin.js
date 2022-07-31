@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Blog = require('../models/blog');
 const Link = require('../models/link');
+const Category = require('../models/category');
 const fs = require("fs");
+const category = require('../models/category');
 
 
 module.exports.getBlogs = (req,res,next)=>{
@@ -18,25 +20,78 @@ module.exports.getBlogs = (req,res,next)=>{
 }
 
 module.exports.getAddBlog = (req,res,next)=>{
-    res.render('admin/add-blog', {
+    
+    Category.find()
+    .then(categories=>{
+        res.render('admin/add-blog', {
         title: "Blog Ekle",
         path:'/add-blog',
+        categories:categories
         
     });
+    })   
 }
 
 module.exports.getEditBlog = (req,res,next)=>{
     const urlExt = req.params.urlExt;
 
-    Blog.findOne({urlExt: urlExt})
-        .then(blog=>{
-            res.render('admin/edit-blog',{
-                title: "Düzenle",
-                path:'/editblog',
-                blog: blog
-            });
+    Category.find()
+    .then(categories=>{
+        Blog.findOne({urlExt: urlExt})
+        .populate('categories')
+            .then(blog=>{
+                
+                categories.map(category=>{
+                    if(blog.categories.includes(category)){
+                        console.log("here")
+                    }
+                })
+
+                res.render('admin/edit-blog',{
+                    title: "Düzenle",
+                    path:'/editblog',
+                    blog: blog,
+                    categories:categories
+                });
+            })
+    })
+    .catch(err=>console.log(err))
+}
+
+module.exports.getCategory= (req,res,next)=>{
+    Category.find()
+    .then(categories=>{
+        res.render('admin/category', {
+            title: "Kategorileri Düzenle",
+            path:'/category',
+            categories: categories
+        });
+    })
+}
+
+module.exports.postAddCategory = (req,res,next)=>{
+    const categoryName = req.body.categoryName;
+
+    const category = new Category({
+        _id: mongoose.Types.ObjectId(),
+        categoryName: categoryName
+    });
+    category.save()
+        .then(()=>{
+            res.redirect('/admin/category');
         })
-        .catch(err=>console.log(err))
+        .catch(err=> console.log(err));
+}
+
+module.exports.postDeleteCategory = (req,res,next)=>{
+    console.log("here")
+    const categoryid = req.params.categoryid;
+
+    Category.findByIdAndRemove({_id:categoryid})
+    .then(()=>{
+        res.redirect('/admin/category');    
+    })
+    .catch(err=> console.log(err))
 }
 
 module.exports.postAddBlog = (req,res,next)=>{
@@ -44,11 +99,22 @@ module.exports.postAddBlog = (req,res,next)=>{
     const readMin = req.body.readMin
     const body = req.body.editor;
     const urlExt = title.toLowerCase().replace(' ', "-");
+    var categories = req.body.category;
+
+    if(typeof(category)===String){
+        categories = categories.map(category=>{
+            return mongoose.Types.ObjectId(category)
+        })
+    }
+    else{
+        categories = categories
+    }
 
     const blog = new Blog({
         _id: mongoose.Types.ObjectId(),
         title: title,
         readMin: readMin,
+        categories: categories,
         body: body,
         urlExt:urlExt
     });
@@ -65,13 +131,25 @@ module.exports.postEditBlog = (req,res,next)=>{
     const readMin = req.body.readMin;
     const body = req.body.editor;
     const newurlExt = title.toLowerCase().replace(" ", "-");
+    var categories = req.body.category;
+
+    if(typeof(category)===String){
+        categories = categories.map(category=>{
+            return mongoose.Types.ObjectId(category)
+        })
+    }
+    else{
+        categories = categories
+    }
+    
 
     Blog.updateOne({urlExt: urlExt}, {
         $set: {
             title: title,
             readMin: readMin,
             body: body,
-            urlExt:newurlExt
+            urlExt:newurlExt,
+            categories:categories
         }
     })
     .then(() => {

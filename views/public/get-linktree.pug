@@ -32,7 +32,7 @@ block append content
                                     
                                     if isAdmin 
                                         div 
-                                            form(action=`admin/delete-link/${link._id}` method='POST')
+                                            form(action=`/admin/delete-link/${link._id}` method='POST')
                                                 input(type="hidden" name="_csrf" value=`${csrfToken}`)
                                                 button(type='submit').btn.btn-secondary-outline.border-0
                                                     img(src="/img/delete.png" width="10" height="10")

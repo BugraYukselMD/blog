@@ -145,72 +145,82 @@ module.exports.postRegister = (req,res,next)=>{
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
+    const passwordAgain = req.body.passwordAgain;
     const image = req.file;
     const urlExt = name.toLowerCase().replace(' ', '-');
 
-    User.findOne({email: email})
-    .then(user => {
-        if(user){
-            if(user.name == name && user.email == email) {
-                req.session.errorMessage = 'Bu kullanıcı sistemde mevcut!';
-                req.session.save(function(err) {
-                    console.log(err);
-                    return res.redirect('/register');
-                });
-            }else if(user.email == email) {
-                req.session.errorMessage = 'Bu mail adresi alınmış!';
-                req.session.save(function(err) {
-                    console.log(err);
-                    return res.redirect('/register');
-                });
-            }else if(user.name == name) {
-                req.session.errorMessage = 'Bu kullanıcı adı alınmış!';
-                req.session.save(function(err) {
-                    console.log(err);
-                    return res.redirect('/register');
-                });
-            }
-        }
-        return bcrypt.hash(password, 10);
-    })
-    .then (hashedPassword => {
-        const newUser = new User({
-            name: name,
-            email: email,
-            urlExt: urlExt,
-            imageUrl: image?image.filename:undefined,
-            password: hashedPassword,
+    if(password!==passwordAgain){
+        req.session.errorMessage = 'Girdiğiniz şifreler birbiriyle uyuşmuyor!';
+        req.session.save(function(err) {
+            console.log(err);
+            return res.redirect('/register');
         });
-        newUser.save();
-    })
-    .then(() => {
-
-        var mailOptions = {
-            from: "drbugrayukselofficial@gmail.com",
-            to: email,
-            subject: 'Hesap Aktivasyonu',
-            html: '<h1>Hesabınız başarılı bir şekilde oluşturuldu!</h1>'
-          };
-
-        transporter.sendMail(mailOptions);    
-        res.redirect('/login')  
-    })
-    .catch(err => {
-        if(err.name == 'ValidationError'){
-            let message = '';
-            for(field in err.errors){
-                message += err.errors[field].message + '<br>';
+    }
+    else{
+        User.findOne({email: email})
+        .then(user => {
+            if(user){
+                if(user.name == name && user.email == email) {
+                    req.session.errorMessage = 'Bu kullanıcı sistemde mevcut!';
+                    req.session.save(function(err) {
+                        console.log(err);
+                        return res.redirect('/register');
+                    });
+                }else if(user.email == email) {
+                    req.session.errorMessage = 'Bu mail adresi alınmış!';
+                    req.session.save(function(err) {
+                        console.log(err);
+                        return res.redirect('/register');
+                    });
+                }else if(user.name == name) {
+                    req.session.errorMessage = 'Bu kullanıcı adı alınmış!';
+                    req.session.save(function(err) {
+                        console.log(err);
+                        return res.redirect('/register');
+                    });
+                }
             }
-
-            res.render('account/get-register', {
-                path: '/register',
-                title: 'Üye Ol',
-                errorMessage: message
+            return bcrypt.hash(password, 10);
+        })
+        .then (hashedPassword => {
+            const newUser = new User({
+                name: name,
+                email: email,
+                urlExt: urlExt,
+                imageUrl: image?image.filename:undefined,
+                password: hashedPassword,
             });
-        } else {
-            next(err);
-        }
-    });
+            newUser.save();
+        })
+        .then(() => {
+
+            var mailOptions = {
+                from: "drbugrayukselofficial@gmail.com",
+                to: email,
+                subject: 'Hesap Aktivasyonu',
+                html: '<h1>Hesabınız başarılı bir şekilde oluşturuldu!</h1>'
+            };
+
+            transporter.sendMail(mailOptions);    
+            res.redirect('/login')  
+        })
+        .catch(err => {
+            if(err.name == 'ValidationError'){
+                let message = '';
+                for(field in err.errors){
+                    message += err.errors[field].message + '<br>';
+                }
+
+                res.render('account/get-register', {
+                    path: '/register',
+                    title: 'Üye Ol',
+                    errorMessage: message
+                });
+            } else {
+                next(err);
+            }
+        });
+    }
 }
 
 module.exports.getReset = (req,res,next)=>{
@@ -421,11 +431,13 @@ module.exports.postAddFavourites = (req,res,next)=>{
         user.addFavourites(blogid)
         req.session.user = user;
         req.session.favourites = user.favourites;
-        return user;
+
+        req.session.save(function(err) {
+            console.log(err);
+            return res.redirect(`/favourites/${user.urlExt}`);
+        });
     })
-    .then(user=>{
-        res.redirect(`/favourites/${user.urlExt}`)
-    })
+    .catch(err=>{console.log(err)})
     }  
 }
 
@@ -439,7 +451,11 @@ module.exports.postDeleteFavourite = (req,res,next)=>{
         req.session.user = user;
         req.session.favourites = user.favourites;
         req.session.action = 'deleted';
-        res.redirect(`/favourites/${user.urlExt}`)
+        req.session.save(function(err) {
+            console.log(err);
+            return res.redirect(`/favourites/${user.urlExt}`);
+        });
+        
     })
 
 }
@@ -464,7 +480,11 @@ module.exports.postEditProfile = (req,res,next)=>{
     .then(updatedUser=>{
         req.session.user = updatedUser;
         req.session.favourites = updatedUser.favourites;
-        res.redirect(`/profile/${updatedUser.urlExt}`)
+        req.session.save(function(err) {
+            console.log(err);
+            return res.redirect(`/profile/${updatedUser.urlExt}`);
+        });
+        
         return 0
     })
     .then(()=>{

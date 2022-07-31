@@ -2,7 +2,7 @@ mixin commentArea(blog)
     .flex-row
         .card.border-0.card-add-comment.mx-auto 
             .card-body.mx-auto
-                form(action="" method="POST")
+                form(action=`/blog/${blog.urlExt}` method="POST")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
 
                     .d-flex.justify-content.between.align-items-center

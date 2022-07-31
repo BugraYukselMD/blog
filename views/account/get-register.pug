@@ -3,7 +3,7 @@ extends ../layouts/main-layout.pug
 block content
     
     if errorMessage
-        
+        .container.for-spacing
         .container.common-size.mx-auto
             .alert.alert-danger.text-center !{errorMessage}
     
@@ -43,7 +43,19 @@ block content
                                 strong.common-text-color Şifre
                     .d-flex.flex-xs-column.justify-content-center
                         div
-                            input.form-control#password(type="password" name="password")  
+                            input.form-control#password(type="password" name="password") 
+                
+                .row
+                    .d-flex.flex-xs-column.justify-content-center
+                        div.text-center
+                            label(for="password-again").col-form-label 
+                                strong.common-text-color Şifreyi Tekrar Giriniz
+                    .d-flex.flex-xs-column.justify-content-center
+                        div
+                            input.form-control#passwordAgain(type="password" name="passwordAgain")
+                    .d-flex.flex-xs-column.justify-content-center
+                        div
+                            small#out 
 
                 .row
                     .d-flex.flex-xs-column.justify-content-center
@@ -60,4 +72,4 @@ block content
                 
                 .row
                     .d-flex.justify-content-center
-                        input(type="submit" value="Üye Ol").btn.common-content-color
+                        input(type="submit" value="Üye Ol" id="registerButton").btn.common-content-color

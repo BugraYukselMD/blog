@@ -1,5 +1,6 @@
 var body = $('#blogBody').val();
 var readMin = $('#blogreadMin').val();
+
 $(document).ready(function() {
     $('#body').summernote({
         toolbar: [

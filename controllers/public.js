@@ -1,19 +1,47 @@
 const Blog = require('../models/blog');
 const Link = require('../models/link');
+const Category = require('../models/category');
+const mongoose = require('mongoose');
 
 module.exports.getIndex = (req,res,next)=>{
     var errorMessage = req.session.errorMessage;
     delete req.session.errorMessage;
-    Blog.find()
-        .then(blogs=>{
-            res.render('public/index',{
-                title: "Blog Akışı",
-                path:'/',
-                blogs:blogs,
-                errorMessage: errorMessage
-            });
+    const action = req.query.category;
+
+
+    if(action==="All" || action===undefined || action==="NotFound"){
+        Category.find()
+        .then(categories=>{
+            Blog.find()
+                .then(blogs=>{
+                    res.render('public/index',{
+                        title: "Blog Akışı",
+                        path:'/',
+                        blogs:blogs,
+                        categories: categories,
+                        action:action,
+                        errorMessage: errorMessage
+                    });
+                }) 
         })
         .catch(err=>console.log(err))
+    }
+    else{
+        const blgs =  req.session.blogs;
+        const cats =  req.session.categories;
+        res.render('public/index',{
+            title: "Blog Akışı",
+            path:'/',
+            blogs:blgs,
+            categories: cats,
+            action:action,
+            errorMessage: errorMessage
+        });
+        delete req.session.blogs;
+        delete req.session.categories;
+    }
+
+   
 }
 
 module.exports.getAbout = (req,res,next)=>{
@@ -65,3 +93,39 @@ module.exports.getLinkTree = (req,res,next)=>{
     })
     .catch(err=>console.log(err));          
 }
+
+module.exports.postList = (req,res,next)=>{
+    delete req.session.errorMessage;
+    
+    var categoryid = req.body.category;
+
+    if(categoryid==="all"){
+        var action = "All"
+        res.redirect(`/?action=${action}`)
+    }
+    else{
+        const _categoryid = mongoose.Types.ObjectId(categoryid)
+        Blog.find({categories:[{_id: _categoryid}]})
+        .then(blogs=>{
+            if(blogs.length===0){
+                var action = "NotFound"
+                req.session.errorMessage = "<p>Aradığınız kategoride yazı bulunamadı!</p>"
+                res.redirect(`/?category=${action}`)
+            }
+            else{
+                Category.find()
+                .then(categories=>{
+                    var category = categories.findIndex(cat=>{
+                        return cat._id.toString()===categoryid
+                    })
+                    
+                    req.session.selectedid = categories[category]._id;
+                    req.session.categories = categories;
+                    req.session.blogs = blogs;
+                    var action = categories[category].categoryName
+                    res.redirect(`/?category=${action}`);
+                })
+            }           
+        })       
+    }
+}   

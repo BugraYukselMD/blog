@@ -24,6 +24,12 @@ const blogSchema = mongoose.Schema({
         trim: true
     },
     urlExt: String,
+    categories:[
+        {
+        type: mongoose.Types.ObjectId,
+        ref: "Category",
+        }
+    ],
     date: {
         type: String,
         default: currentDate()

@@ -40,6 +40,22 @@ body
                             div.text-center
                                 small
                                     strong#out(style="color: #006432;")
+                br
+                .row
+                    if categories.length > 0
+                        .col-sm-2
+                            label(for="tag").form-label Kategoriler
+                        
+                        .col-sm-6.mx-auto
+                            fieldset 
+                                each category in categories
+                                    div
+                                        .row
+                                            .col-1
+                                                input.form-check-input(type="checkbox" name="category" id=`${category._id.toString()}` value= `${category._id.toString()}`)
+                                            .col-11
+                                                label.form-check-label(for=`${category._id.toString()}`) #{category.categoryName}
+                br                                    
                 .row 
                     .col-sm-2
                         label(for="body").form-label Blog Yazısı
