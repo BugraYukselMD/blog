@@ -102,7 +102,6 @@ module.exports.postAddBlog = (req,res,next)=>{
     var categories = req.body.category;
     const image = req.file;
 
-    console.log(image)    
     if(typeof(category)===String){
         categories = categories.map(category=>{
             return mongoose.Types.ObjectId(category)
@@ -136,7 +135,7 @@ module.exports.postEditBlog = (req,res,next)=>{
     const newurlExt = title.toLowerCase().replace(" ", "-");
     var categories = req.body.category;
     const image = req.file;
-    console.log(image) 
+
     if(typeof(category)===String){
         categories = categories.map(category=>{
             return mongoose.Types.ObjectId(category)
