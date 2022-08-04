@@ -35,5 +35,5 @@ span{
     max-width:20rem;
 }
 footer{
-    font-size: calc(12px + 10 * ((100vw - 320px) / 1360));
+    font-size: calc(12px + 10 * ((50vw - 400px) / 1360));
 }

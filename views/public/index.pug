@@ -32,10 +32,23 @@ block append content
                 .alert.alert-warning.text-center !{errorMessage}
 
         section
+            .container.for-spacing
             each blog in blogs.reverse()
                 .flex-row
                     .d-flex.justify-content-center.p-2
                         +createBlogFlow(blog)
+
+            .container.for-spacing
+            if !isFull
+                .flex.row
+            
+                    form(action=`/load-more/${blogs.length}` method="POST")
+                        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+
+                        .d-flex.justify-content-center.align-items-center  
+                            div
+                                button(type="submit").btn.btn-secondary-outline.border-0
+                                    img(src="/img/loadmore.png" width="50" height="40")
     
     else 
         

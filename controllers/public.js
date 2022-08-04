@@ -3,17 +3,43 @@ const Link = require('../models/link');
 const Category = require('../models/category');
 const mongoose = require('mongoose');
 
+const LIST_LENGTH = 10
+const LIST_INCREASE = 5
+
 module.exports.getIndex = (req,res,next)=>{
     var errorMessage = req.session.errorMessage;
     delete req.session.errorMessage;
-    const action = req.query.category;
 
+    var length = req.session.length;
+    delete req.session.length
+
+    const action = req.query.category;
+    res.locals.isFull = true
 
     if(action==="All" || action===undefined || action==="NotFound"){
         Category.find()
         .then(categories=>{
             Blog.find()
                 .then(blogs=>{
+                    if(length){
+
+                        if(length >= blogs.length){
+                            res.locals.isFull = true
+                        }
+                        else{
+                            res.locals.isFull = false
+                        }
+
+                        if (length > blogs.length){
+                            length = blogs.length
+                        }
+                        
+                        blogs = blogs.slice(-length);
+                    }
+                    else{
+                        blogs = blogs.slice(-LIST_LENGTH)
+                    }
+                    
                     res.render('public/index',{
                         title: "Blog Akışı",
                         path:'/',
@@ -129,3 +155,12 @@ module.exports.postList = (req,res,next)=>{
         })       
     }
 }   
+
+module.exports.postLoadMore = (req,res,next)=>{
+    var length = req.params.blogslength;
+
+    length = parseInt(length) + LIST_INCREASE;
+
+    req.session.length = length
+    res.redirect("/") 
+}

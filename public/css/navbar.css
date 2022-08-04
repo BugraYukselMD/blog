@@ -1,8 +1,8 @@
 #navBrand{
-    font-size: calc(25px + 10 * ((100vw - 320px) / 680));
+    font-size: calc(25px + 10 * ((50vw - 400px) / 680));
     font-family:'Josefin Sans', sans-serif;
     
 }
 .nav-items{
-    font-size: calc(15px + 5 * ((100vw - 320px) / 680));
+    font-size: calc(15px + 5 * ((50vw - 400px) / 680));
 }

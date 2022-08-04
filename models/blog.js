@@ -18,6 +18,7 @@ const blogSchema = mongoose.Schema({
         trim: true
     },
     readMin: Number,
+    coverImg: String,
     body: {
         type: String,
         required: true,

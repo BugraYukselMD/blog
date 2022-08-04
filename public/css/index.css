@@ -7,10 +7,10 @@
     
 }
 .index-title{
-    font-size: calc(20px + 10 * ((100vw - 320px) / 680));
+    font-size: calc(20px + 10 * ((50vw - 400px) / 680));
 }
 .index-footer{
-    font-size: calc(15px + 1 * ((100vw - 320px) / 680));
+    font-size: calc(15px + 1 * ((50vw - 400px) / 680));
 }
 .table-div{
     max-width:50rem;

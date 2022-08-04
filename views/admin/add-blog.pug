@@ -22,8 +22,10 @@ head
     body    
         .card.border-0(style="width: 80rem;background-color: mintcream;box-shadow: 7px 5px 30px 5px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);transition: all .55s ease-in-out;").mx-auto
             .card-body 
-                form(action="/admin/add-blog" method="POST")
+                form(action="/admin/add-blog" method="POST"  enctype="multipart/form-data")
                     input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                    input(type="file" name="image" id="custom-file-chooser" hidden)
+
                     .row
                         .col-sm-2
                             label(for="title").form-label Blog Başlığı
@@ -38,6 +40,17 @@ head
                             div.text-center
                                 small
                                     strong#out(style="color: #006432;")   
+                    br
+                    .row
+                        .col-sm-4
+                            div
+                                label(for="imageUrl").col-form-label 
+                                    strong.common-text-color Kapak Fotoğrafı
+                        .col-sm-8
+                            div
+                                button(type="button").btn.btn-secondary-outline.border-0
+                                    label(for="custom-file-chooser")
+                                        img(src="/img/select.png" width="20" height="20")
                     br
                     .row
                         if categories.length > 0

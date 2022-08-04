@@ -100,7 +100,9 @@ module.exports.postAddBlog = (req,res,next)=>{
     const body = req.body.editor;
     const urlExt = title.toLowerCase().replace(' ', "-");
     var categories = req.body.category;
+    const image = req.file;
 
+    console.log(image)    
     if(typeof(category)===String){
         categories = categories.map(category=>{
             return mongoose.Types.ObjectId(category)
@@ -114,6 +116,7 @@ module.exports.postAddBlog = (req,res,next)=>{
         _id: mongoose.Types.ObjectId(),
         title: title,
         readMin: readMin,
+        coverImg: image?image.filename:undefined,
         categories: categories,
         body: body,
         urlExt:urlExt
@@ -132,7 +135,8 @@ module.exports.postEditBlog = (req,res,next)=>{
     const body = req.body.editor;
     const newurlExt = title.toLowerCase().replace(" ", "-");
     var categories = req.body.category;
-
+    const image = req.file;
+    console.log(image) 
     if(typeof(category)===String){
         categories = categories.map(category=>{
             return mongoose.Types.ObjectId(category)
@@ -141,12 +145,27 @@ module.exports.postEditBlog = (req,res,next)=>{
     else{
         categories = categories
     }
-    
+
+    if (image) {
+        Blog.findOne({urlExt: urlExt})
+        .then(blog=>{
+            const oldImg = blog.coverImg;
+            
+            if(oldImg){
+                fs.unlink('public/uploads/' + oldImg, err => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }            
+        }) 
+    }  
 
     Blog.updateOne({urlExt: urlExt}, {
         $set: {
             title: title,
             readMin: readMin,
+            coverImg: image?image.filename:undefined,
             body: body,
             urlExt:newurlExt,
             categories:categories
