@@ -94,13 +94,21 @@ module.exports.postDeleteCategory = (req,res,next)=>{
     .catch(err=> console.log(err))
 }
 
-module.exports.postAddBlog = (req,res,next)=>{
+module.exports.postAddBlog = async (req,res,next)=>{
     const title = req.body.title;
     const readMin = req.body.readMin
     const body = req.body.editor;
     const urlExt = title.toLowerCase().replace(' ', "-");
     var categories = req.body.category;
     const image = req.file;
+
+    if(image){
+        image = await driverService.blogCreateAndUploadFile(image);
+        image = image.data.id
+    }
+    else{
+        image = undefined
+    }
 
     if(typeof(category)===String){
         categories = categories.map(category=>{
@@ -115,7 +123,7 @@ module.exports.postAddBlog = (req,res,next)=>{
         _id: mongoose.Types.ObjectId(),
         title: title,
         readMin: readMin,
-        coverImg: image?image.filename:undefined,
+        coverImg: image,
         categories: categories,
         body: body,
         urlExt:urlExt
@@ -127,7 +135,7 @@ module.exports.postAddBlog = (req,res,next)=>{
         .catch(err=> console.log(err));
 }
 
-module.exports.postEditBlog = (req,res,next)=>{
+module.exports.postEditBlog = async (req,res,next)=>{
     const urlExt = req.params.urlExt;
     const title = req.body.title;
     const readMin = req.body.readMin;
@@ -135,6 +143,14 @@ module.exports.postEditBlog = (req,res,next)=>{
     const newurlExt = title.toLowerCase().replace(" ", "-");
     var categories = req.body.category;
     const image = req.file;
+
+    if(image){
+        image = await driverService.blogCreateAndUploadFile(image)
+        image = image.data.id
+    }
+    else{
+        image = undefined
+    }
 
     if(typeof(category)===String){
         categories = categories.map(category=>{
@@ -164,7 +180,7 @@ module.exports.postEditBlog = (req,res,next)=>{
         $set: {
             title: title,
             readMin: readMin,
-            coverImg: image?image.filename:undefined,
+            coverImg: image,
             body: body,
             urlExt:newurlExt,
             categories:categories
@@ -188,17 +204,26 @@ module.exports.postDeleteBlog = (req,res,next)=>{
         .catch(err=>console.log(err))
 }
 
-module.exports.postAddLink = (req,res,next)=>{
+module.exports.postAddLink = async (req,res,next)=>{
     const linkName = req.body.linkName;
     const linkUrl = req.body.linkUrl;
     const image = req.file;
+    
+    if(image){
+        image = await driverService.linkCreateAndUploadFile(image)
+        image = image.data.id
+    }
+    else{
+        image = DEFAULT_IMAGE_ID
+    }
 
     const link = new Link({
         _id: mongoose.Types.ObjectId(),
         linkName: linkName,
         linkUrl: linkUrl,
-        linkImage: image?image.filename:undefined
+        linkImage: image
     });
+
     link.save()
         .then(()=>{
             res.redirect('/linktree');

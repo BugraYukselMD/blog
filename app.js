@@ -8,8 +8,8 @@ const path = require('path');
 const csurf = require('csurf');
 const mongoose = require('mongoose');
 const mongoDBStore = require('connect-mongodb-session')(session);
-const multer = require('multer');
-const port = process.env.PORT || 3000
+const multer = require("multer")
+const port = process.env.PORT || 3000;
 
 // Adding Routers
 const publicRouter = require('./routers/public');
@@ -18,7 +18,10 @@ const accountRouter = require('./routers/account');
 const errorController = require('./controllers/error');
 
 // MongoDB connection string
-const uri = process.env.MONGODB_URI || 'mongodb+srv://GhostITShell:GitS1995@gundengunedahaiyiye.mskkbh7.mongodb.net/?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI || 'mongodb+srv://bugrayukselmd:GitS1995*@blog.cgercxu.mongodb.net/?retryWrites=true&w=majority';
+
+// Makes the public folder as static
+app.use(express.static(path.join(__dirname,'public')));
 
 // Store for sessions
 var store = new mongoDBStore({
@@ -27,7 +30,6 @@ var store = new mongoDBStore({
 })
 
 // Multer Configuration
-app.use(express.static(path.join(__dirname,'public')));
 const maxSize = 100 * 1024 * 1024;
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -35,6 +37,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    
     }
 });
 const upload = multer({ storage: storage, limits: { fieldSize: maxSize }}).single('image');

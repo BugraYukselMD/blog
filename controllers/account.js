@@ -1,11 +1,11 @@
 const User = require('../models/user');
 const Login = require('../models/login');
 const Blog = require('../models/blog');
-const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const fs = require("fs");
+const driverService = require("../utils/driveService")
 
 var transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -18,6 +18,8 @@ var transporter = nodemailer.createTransport({
         pass: 'sbeazngtneinhjzk'
     }
 });
+
+const DEFAULT_IMAGE_ID = "1QCcp8bV5wvuTawCRMmjwPMGn-vAvqpBY"
 
 module.exports.getLogout = (req,res,next)=>{
     return req.session.destroy(err => {
@@ -141,13 +143,22 @@ module.exports.getRegister = (req,res,next)=>{
     });
 }
 
-module.exports.postRegister = (req,res,next)=>{
+module.exports.postRegister = async (req,res,next)=>{
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
     const passwordAgain = req.body.passwordAgain;
-    const image = req.file;
+    var image = req.file;
     const urlExt = name.toLowerCase().replace(' ', '-');
+
+    if(image){
+        image = await driverService.userCreateAndUploadFile(image);
+        image = image.data.id
+    }
+    else{
+        image = DEFAULT_IMAGE_ID
+    }
+
 
     if(password!==passwordAgain){
         req.session.errorMessage = 'Girdiğiniz şifreler birbiriyle uyuşmuyor!';
@@ -187,7 +198,7 @@ module.exports.postRegister = (req,res,next)=>{
                 name: name,
                 email: email,
                 urlExt: urlExt,
-                imageUrl: image?image.filename:undefined,
+                imageUrl: image,
                 password: hashedPassword,
             });
             newUser.save();
@@ -460,17 +471,28 @@ module.exports.postDeleteFavourite = (req,res,next)=>{
 
 }
 
-module.exports.postEditProfile = (req,res,next)=>{
+module.exports.postEditProfile = async (req,res,next)=>{
     const user = req.session.user;
     const name = req.body.name;
-    const image = req.file;
-    const oldImg = user.imageUrl;
+    var image = req.file;
+
+    if(user.imageUrl !== DEFAULT_IMAGE_ID){
+        response = await driverService.deleteFile(user.imageUrl);
+    }
+
+    if(image){
+        image = await driverService.userCreateAndUploadFile(image)
+        image = image.data.id
+    }
+    else{
+        image = DEFAULT_IMAGE_ID
+    }
 
     User.updateOne({_id: user._id}, {
         $set: {
             name: name,
             urlExt: name.toLowerCase().replace(' ', '-'),
-            imageUrl: req.file?req.file.filename:user.imageUrl
+            imageUrl: image
         }
     })
 
@@ -485,21 +507,6 @@ module.exports.postEditProfile = (req,res,next)=>{
             return res.redirect(`/profile/${updatedUser.urlExt}`);
         });
         
-        return 0
-    })
-    .then(()=>{
-        if (image) {
-            if(oldImg == 'default.png'){
-                return;
-            }
-            else{
-                fs.unlink('public/uploads/' + oldImg, err => {
-                if (err) {
-                    console.log(err);
-                }
-                });
-            } 
-        }
     })
     .catch(err => {
         console.log(err);

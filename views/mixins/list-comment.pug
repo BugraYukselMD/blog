@@ -11,7 +11,7 @@ mixin createComment(blog)
                         .d-flex.justify-content-between.align-items-center
                             
                             div
-                                img.rounded-circle(src=(comment.user.imageUrl?`/uploads/${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35" title=`${comment.user.name}`)
+                                img.rounded-circle(src=(comment.user.imageUrl?`https://drive.google.com/uc?export=view&id=${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35" title=`${comment.user.name}`)
                             
                             div
                                 .d-flex.justify-content-center.align-items-center
@@ -43,7 +43,7 @@ mixin createComment(blog)
                                         .d-flex.justify-content-center.align-items-center
                                         
                                             div 
-                                                img.rounded-circle(src=(comment.user.imageUrl?`/uploads/${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35" title=`${reply.user.name}`)    
+                                                img.rounded-circle(src=(comment.user.imageUrl?`https://drive.google.com/uc?export=view&id=${comment.user.imageUrl}`: `/uploads/default.png`) width="35" height="35" title=`${reply.user.name}`)    
                                             
                                             div
                                                 if isAuthenticated
