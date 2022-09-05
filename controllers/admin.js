@@ -4,7 +4,7 @@ const Link = require('../models/link');
 const Category = require('../models/category');
 const fs = require("fs");
 const category = require('../models/category');
-
+const driverService = require("../utils/driveService")
 
 module.exports.getBlogs = (req,res,next)=>{
     Blog.find()
@@ -100,7 +100,7 @@ module.exports.postAddBlog = async (req,res,next)=>{
     const body = req.body.editor;
     const urlExt = title.toLowerCase().replace(' ', "-");
     var categories = req.body.category;
-    const image = req.file;
+    var image = req.file;
 
     if(image){
         image = await driverService.blogCreateAndUploadFile(image);
@@ -207,7 +207,7 @@ module.exports.postDeleteBlog = (req,res,next)=>{
 module.exports.postAddLink = async (req,res,next)=>{
     const linkName = req.body.linkName;
     const linkUrl = req.body.linkUrl;
-    const image = req.file;
+    var image = req.file;
     
     if(image){
         image = await driverService.linkCreateAndUploadFile(image)
