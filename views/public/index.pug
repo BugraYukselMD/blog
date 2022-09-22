@@ -39,7 +39,7 @@ block append content
                         +createBlogFlow(blog)
 
             .container.for-spacing
-            if !isFull
+            if isFull
                 .flex.row
             
                     form(action=`/load-more/${blogs.length}` method="POST")
