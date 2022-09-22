@@ -142,7 +142,7 @@ module.exports.postEditBlog = async (req,res,next)=>{
     const body = req.body.editor;
     const newurlExt = title.toLowerCase().replace(" ", "-");
     var categories = req.body.category;
-    const image = req.file;
+    var image = req.file;
 
     if(image){
         image = await driverService.blogCreateAndUploadFile(image)
