@@ -3,8 +3,6 @@ const Link = require('../models/link');
 const Category = require('../models/category');
 const mongoose = require('mongoose');
 
-const LIST_LENGTH = 10
-const LIST_INCREASE = 5
 
 module.exports.getIndex = (req,res,next)=>{
     var errorMessage = req.session.errorMessage;
@@ -155,12 +153,3 @@ module.exports.postList = (req,res,next)=>{
         })       
     }
 }   
-
-module.exports.postLoadMore = (req,res,next)=>{
-    var length = req.params.blogslength;
-
-    length = parseInt(length) + LIST_INCREASE;
-
-    req.session.length = length
-    res.redirect("/") 
-}
