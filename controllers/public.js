@@ -7,37 +7,15 @@ const mongoose = require('mongoose');
 module.exports.getIndex = (req,res,next)=>{
     var errorMessage = req.session.errorMessage;
     delete req.session.errorMessage;
-
-    var length = req.session.length;
-    delete req.session.length
-
+    
     const action = req.query.category;
-    res.locals.isFull = true
 
     if(action==="All" || action===undefined || action==="NotFound"){
         Category.find()
         .then(categories=>{
             Blog.find()
                 .then(blogs=>{
-                    if(length){
-
-                        if(length >= blogs.length){
-                            res.locals.isFull = true
-                        }
-                        else{
-                            res.locals.isFull = false
-                        }
-
-                        if (length > blogs.length){
-                            length = blogs.length
-                        }
-                        
-                        blogs = blogs.slice(-length);
-                    }
-                    else{
-                        blogs = blogs.slice(-LIST_LENGTH)
-                    }
-                    
+      
                     res.render('public/index',{
                         title: "Blog Akışı",
                         path:'/',
