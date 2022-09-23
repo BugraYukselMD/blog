@@ -12,6 +12,5 @@ router.get('/linktree', locals, controller.getLinkTree);
 
 // for -post functions
 router.post('/list-by-category', locals, controller.postList);
-router.post('/load-more/:blogslength', locals, controller.postLoadMore);
 
 module.exports = router;
